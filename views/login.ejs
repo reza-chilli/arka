@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arka CRM</title>
+</head>
+<body class="m-0 p-0 bg-light">
+    <% if (error.length) { %>
+        <div class="alert alert-danger mb-3" role="alert">
+            <%= error[0] %>
+        </div>
+    <% } %>
+    <div class="container d-flex justify-content-center align-items-center vw-100 vh-100">
+        <div class="d-flex flex-column justify-content-around h-50 col-sm-12 col-md-8 col-lg-4 bg-white shadow border rounded-4 p-5">
+            <h5 class="mb-5 text-center">Welcome to Arka Electro Partov CRM Application</h5>
+            <form action="/auth/login" method="post">
+                <div class="mb-3">
+                    <input type="text" class="form-control bg-light is-valid" name="username" id="username" placeholder="Username">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control bg-light" name="password" id="password" placeholder="Password">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" name="rememberMe" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember Me</label>
+                </div>
+                <button class="btn btn-primary w-100" type="submit">Get Started</button>
+            </form>
+        </div>
+    </div>
+    <script src="/main.js"></script>
+</body>
+</html>
