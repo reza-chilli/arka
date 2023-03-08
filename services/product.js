@@ -1,4 +1,4 @@
-const { countDocuments } = require('../models/product');
+const { countDocuments, updateMany } = require('../models/product');
 const productModel = require('../models/product');
 
 module.exports = {
@@ -23,6 +23,22 @@ module.exports = {
         } catch (error) {
             console.error(`Error in product find: ${error}`);
             return new Error('something went wrong');
+        }
+    },
+    async deleteMany(data) {
+        try {
+            return await productModel.deleteMany(data);
+        } catch (error) {
+            console.error(`Error in product deleteMany: ${error}`);
+            return new Error('something went wrong');
+        }
+    },
+    async updateMany(data, query, option) {
+        try {
+            return await productModel.updateMany(data, query, option);
+        } catch (error) {
+            console.error(`Error in product updateMany: ${error}`);
+            return new Error('something went wrong'); 
         }
     },
     async countDocuments(query) {

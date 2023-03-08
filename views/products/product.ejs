@@ -16,7 +16,13 @@
                     <a class="nav-link" aria-current="page" href="/product/add-product">New</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Delete</a>
+                    <button class="nav-link btn" id="deleteProduct">Delete</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn" id="deactivateProduct">Deactivate</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn" id="activateProduct">Activate</button>
                 </li>
             </ul>
           </div>
@@ -62,9 +68,76 @@
             });
             $('#myTable tbody').on('click', 'tr', function () {
                 $(this).toggleClass('selected');
-                console.log(dataTable.rows('.selected').data()[0]);
             });
+            $('#deleteProduct').on('click', function() {
+                const ids = grabSelectedItemsId();
+                if (!ids.length) {
+                    return null;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: host + '/product/delete-product',
+                    data: {
+                        ids,
+                    },
+                    success: function(data) {
+                        dataTable.draw();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('error');
+                    },
+                });
             });
+            $('#deactivateProduct').on('click', function() {
+                const ids = grabSelectedItemsId();
+                if (!ids.length) {
+                    return null;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: host + '/product/deactivate-product',
+                    data: {
+                        ids,
+                    },
+                    success: function(data) {
+                        dataTable.draw();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('error');
+                    },
+                });
+            });
+            $('#activateProduct').on('click', function() {
+                const ids = grabSelectedItemsId();
+                if (!ids.length) {
+                    return null;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: host + '/product/activate-product',
+                    data: {
+                        ids,
+                    },
+                    success: function(data) {
+                        dataTable.draw();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('error');
+                    },
+                });
+            });
+            function grabSelectedItemsId() {
+                const ids = [];
+                const selectedItems = dataTable.rows('.selected').data();
+                for (let i = 0; i < selectedItems.length; i++) {
+                    ids.push(selectedItems[i]._id);
+                }
+                return ids;
+            }
+        });
     </script>
 </body>
 </html>

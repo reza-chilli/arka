@@ -16,6 +16,44 @@ module.exports = {
             console.error(`Error in addProductPostData: ${error}`);
         }
     },
+    async deleteProductPostData(req, res) {
+        try {
+            const data = req.body;
+            const query = {
+                _id: { $in: data.ids },
+            };
+            const deleteProducts = await productService.deleteMany(query);
+            res.status(200).send();
+        } catch (error) {
+            console.error(`Error in deleteProductPostData: ${error}`);
+        }
+    },
+    async deactivateProductPostData(req, res) {
+        try {
+            const body = req.body;
+            const data = {
+                _id: { $in: body.ids },
+            };
+            const query = { active: false };
+            const deactiveProducts = await productService.updateMany(data, query);
+            res.status(200).send();
+        } catch (error) {
+            console.error(`Error in deactivateProductPostData: ${error}`);
+        }
+    },
+    async activateProductPostData(req, res) {
+        try {
+            const body = req.body;
+            const data = {
+                _id: { $in: body.ids },
+            };
+            const query = { active: true };
+            const deactiveProducts = await productService.updateMany(data, query);
+            res.status(200).send();
+        } catch (error) {
+            console.error(`Error in activateProductPostData: ${error}`);
+        }
+    },
     async productDataTable(req, res) {
         try {
             const start = parseInt(req.query.start);
