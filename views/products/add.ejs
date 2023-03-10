@@ -30,7 +30,7 @@
                     <label for="exampleInputEmail1" class="form-label">Product Code</label>
                 </div>
                 <div class="col-9">
-                    <input type="text" class="form-control" disabled>
+                    <input type="text" class="form-control" value="<%= code ? 'pr-' + code : '' %>" disabled>
                 </div>
             </div>
             <div class="row">
@@ -38,7 +38,7 @@
                     <label for="exampleInputEmail1" class="form-label">Product Title</label>
                 </div>
                 <div class="col-9">
-                    <input id="productTitle" type="text" class="form-control" name="productTitle">
+                    <input id="productTitle" type="text" value="<%= title ? title : '' %>" class="form-control" name="productTitle">
                 </div>
             </div>
         </form>

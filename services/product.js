@@ -24,6 +24,14 @@ module.exports = {
             return new Error('something went wrong');
         }
     },
+    async findOne(query, select, option) {
+        try {
+            return await productModel.findOne(query, select, option);
+        } catch (error) {
+            console.error(`Error in product findOne: ${error}`);
+            return new Error('something went wrong');
+        }
+    },
     async deleteMany(data) {
         try {
             return await productModel.deleteMany(data);

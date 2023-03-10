@@ -43,6 +43,7 @@
                     </div>
                 </div>
             <tr>
+              <th></th>
               <th>Product Title</th>
               <th>Status</th>
               <th>Created On</th>
@@ -76,7 +77,17 @@
                     },
                 },
                 "columns": [
-                    { "data": "title" },
+                    {
+                        render: function() {
+                            return '<input class="form-check-input row-checkbox" type="checkbox" value="">';
+                        }
+                    },
+                    { 
+                        "data": "title",
+                        render: function(data, type, row) {
+                            return `<a class="text-decoration-none link-dark" href="/product/add-product/${row._id}">${row.title}</a>`;
+                        },
+                    },
                     { 
                         "data": "active",
                         render: function(data, type, row) {
@@ -89,8 +100,8 @@
                     { "data": "createdAt" }
                 ],
             });
-            $('#myTable tbody').on('click', 'tr', function () {
-                $(this).toggleClass('selected');
+            $('#myTable tbody').on('click', '.row-checkbox', function () {
+                $(this).parent().parent().toggleClass('selected');
             });
             $('#status').on('change', function() {
                 dataTable.draw();

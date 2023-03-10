@@ -1,11 +1,11 @@
 const productService = require('../services/product');
 
 module.exports = {
-    productRender: (req, res) => {
+    productDataTableRender: (req, res) => {
         return res.render('products/product');
     },
     addProductRender: (req, res) => {
-        return res.render('products/add');
+        return res.render('products/add', { product: null });
     },
     addProductPostData: async (req, res) => {
         try {
@@ -14,6 +14,22 @@ module.exports = {
             res.status(200).send();
         } catch (error) {
             console.error(`Error in addProductPostData: ${error}`);
+        }
+    },
+    async productRender(req, res) {
+        try {
+            const { productId } = req.params;
+            let { title, code } = await productService.findOne({ _id: productId });
+            code = code.toString();
+            const codeLength = code.length;
+            if (code.length < 3) {
+                for (let i = 0; i < 3 - codeLength; i++) {
+                    code = '0' + code;
+                }
+            }
+            res.render('products/add', { title, code });
+        } catch (error) {
+            console.error(`Error in product render: ${error}`);
         }
     },
     async deleteProductPostData(req, res) {
