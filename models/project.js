@@ -25,6 +25,14 @@ const projectSchema = new Schema(
             type: Number,
             required: true,
         },
+        firstSerialNumber: {
+            type: Number,
+            required: true,
+        },
+        lastSerialNumber: {
+            type: Number,
+            required: true,
+        },
     },
     { collection: 'projects', versionKey: false, timestamps: true },
 );

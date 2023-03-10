@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arka CRM</title>
+</head>
+<body>
+    <%- include('../partitions/navbar') %>
+    <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1;">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <button class="btn" id="saveBtn">Save</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn" id="saveAndCloseBtn">Save & Close</button>
+                </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <hr class="mt-0">
+    <div class="container border px-5 py-3">
+        <form>
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label class="form-label">Project Code</label>
+                </div>
+                <div class="col-9">
+                    <input type="text" class="form-control" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label for="serialNumber" class="form-label">Fixed Serial Number</label>
+                </div>
+                <div class="col-9">
+                    <input id="serialNumber" type="text" class="form-control" name="serialNumber">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label class="form-label">Product Count</label>
+                </div>
+                <div class="col-9">
+                    <input type="text" class="form-control" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label for="projectTitle" class="form-label">Project Title</label>
+                </div>
+                <div class="col-9">
+                    <input id="projectTitle" type="text" class="form-control" name="projectTitle">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label for="projectTitle" class="form-label">First Serial Number:</label>
+                </div>
+                <div class="col-9">
+                    <input id="projectTitle" type="text" class="form-control" name="projectTitle">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-3">
+                    <label for="projectTitle" class="form-label">Last Serial Number:</label>
+                </div>
+                <div class="col-9">
+                    <input id="projectTitle" type="text" class="form-control" name="projectTitle">
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="/main.js"></script>
+    <script>
+        const host = window.location.origin;
+
+        $('#saveBtn').on('click', function() {
+            const productTitle = $('#productTitle').val();
+            const data = {
+                title: productTitle,
+            };
+            $.ajax({
+                type: "POST",
+                url: host + '/product/add-product',
+                data,
+                success: function(data) {
+                    console.log('successful');
+                },
+                error: function(xhr, status, error) {
+                    console.log('error');
+                },
+            });
+        });
+        $('#saveAndCloseBtn').on('click', function() {
+            const productTitle = $('#productTitle').val();
+            const data = {
+                title: productTitle,
+            };
+            $.ajax({
+                type: "POST",
+                url: host + '/product/add-product',
+                data,
+                success: function(data) {
+                    window.location.href = host + '/product';
+                },
+                error: function(xhr, status, error) {
+                    console.log('error');
+                },
+            });
+        });
+    </script>
+</body>
+</html>
