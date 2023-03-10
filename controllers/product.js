@@ -56,14 +56,19 @@ module.exports = {
     },
     async productDataTable(req, res) {
         try {
-            const start = parseInt(req.query.start);
-            const length = parseInt(req.query.length);
-            const search = req.query.search.value;
+            const start = parseInt(req.body.start);
+            const length = parseInt(req.body.length);
+            const search = req.body.search.value;
             const sanitizedSearch = escape(search);
             const query = {};
 
             if (search !== '') {
                 query.title = { $regex: `.*${sanitizedSearch}.*` };
+            }
+            if (req.body.status == 'active') {
+                query.active = true;
+            } else if (req.body.status == 'deactive') {
+                query.active = false;
             }
 
             const productCount = await productService.countDocuments({});
@@ -71,7 +76,7 @@ module.exports = {
 
             const products = await productService.find(query, null, { skip: start, limit: length });
             const obj = {
-                draw: req.query.draw,
+                draw: req.body.draw,
                 recordsTotal: productCount,
                 recordsFiltered: filteredProductCount,
                 data: products,

@@ -1,4 +1,3 @@
-const { countDocuments, updateMany } = require('../models/product');
 const productModel = require('../models/product');
 
 module.exports = {

@@ -32,8 +32,19 @@
     <div class="container">
         <table id="myTable" class="table table-bordered table-striped col-4">
             <thead>
+                <div class="mb-3 container d-flex px-0 justify-content-between">
+                    <h3>Products</h3>
+                    <div class="col-2">
+                        <select class="form-select" id="status">
+                            <option value="all">All</option>
+                            <option selected value="active">Active</option>
+                            <option value="deactive">Deactive</option>
+                        </select>
+                    </div>
+                </div>
             <tr>
               <th>Product Title</th>
+              <th>Status</th>
               <th>Created On</th>
             </tr>
             </thead>
@@ -59,15 +70,30 @@
                 },
                 "ajax": {
                     url: host + '/product/datatable',
-                    type: 'GET'
+                    type: 'POST',
+                    data: function(d) {
+                        d.status = $('#status').find(":selected").val();
+                    },
                 },
                 "columns": [
                     { "data": "title" },
+                    { 
+                        "data": "active",
+                        render: function(data, type, row) {
+                            if (row.active) {
+                                return 'Active';
+                            }
+                            return 'Deactive'
+                        },
+                    },
                     { "data": "createdAt" }
                 ],
             });
             $('#myTable tbody').on('click', 'tr', function () {
                 $(this).toggleClass('selected');
+            });
+            $('#status').on('change', function() {
+                dataTable.draw();
             });
             $('#deleteProduct').on('click', function() {
                 const ids = grabSelectedItemsId();
