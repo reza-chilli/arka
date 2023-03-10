@@ -57,7 +57,7 @@
                 url: host + '/product/add-product',
                 data,
                 success: function(data) {
-                    console.log('successful');
+                    window.location.href = host + '/product/add-product/' + data;
                 },
                 error: function(xhr, status, error) {
                     console.log('error');

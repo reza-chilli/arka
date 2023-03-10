@@ -5,13 +5,14 @@ module.exports = {
         return res.render('products/product');
     },
     addProductRender: (req, res) => {
-        return res.render('products/add', { product: null });
+        return res.render('products/add', { code: null, title: null });
     },
     addProductPostData: async (req, res) => {
         try {
             const data = req.body;
             const newProduct = await productService.create(data);
-            res.status(200).send();
+
+            res.status(200).send(String(newProduct._id));
         } catch (error) {
             console.error(`Error in addProductPostData: ${error}`);
         }
