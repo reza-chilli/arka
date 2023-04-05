@@ -2,12 +2,20 @@ const projectService = require('../services/project');
 
 module.exports = {
     projectRender: (req, res) => {
-        return res.render('projects/project');
+        const data = {
+            error: req.flash('error'),
+            success: req.flash('success'),
+        };
+        return res.render('projects/project', data);
     },
 
     async addProjectRender(req, res) {
         try {
-            return res.render('projects/add');
+            const data = {
+                error: req.flash('error'),
+                success: req.flash('success'),
+            };
+            return res.render('projects/add', data);
         } catch (error) {
             console.error(error);
         }

@@ -1,0 +1,19 @@
+<% if (error.length) { %>
+    <div class="notification alert alert-danger mb-3" role="alert">
+        <%= error[0] %>
+    </div>
+<% } %>
+<% if (success.length) { %>
+    <div class="notification alert alert-success mb-3" role="alert">
+        <%= success[0] %>
+    </div>
+<% } %>
+<script>
+    setTimeout(function () {
+      $('.notification').slideUp('slow');
+      var cells = $('.notifications');
+      setTimeout(function () {
+        cells.remove();
+      }, 1000);
+    }, 3000);
+  </script>

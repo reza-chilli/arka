@@ -14,10 +14,18 @@ module.exports = {
         });
 
         if (validation.error) {
-            req.flash('err', 'validation failed');
+            req.flash('error', 'validation failed');
             res.redirect('/auth/login');
         } else {
             next();
         }
-    }
+    },
+    async loginCheck(req, res, next) {
+        if (!req.session.details) {
+            req.flash('error', 'please login!');
+            return res.redirect('/');
+        } else {
+            next();
+        }
+    },
 }

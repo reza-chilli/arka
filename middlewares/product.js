@@ -12,7 +12,7 @@ module.exports = {
         });
 
         if (validation.error) {
-            req.flash('err', 'validation failed');
+            req.flash('error', 'validation failed');
             res.redirect('/auth/login');
         } else {
             next();
@@ -30,7 +30,7 @@ module.exports = {
 
         if (validation.error) {
             console.log('validation faild', validation.error);
-            req.flash('err', 'validation failed');
+            req.flash('error', 'validation failed');
             res.redirect('/auth/login');
         } else {
             next();
@@ -48,7 +48,7 @@ module.exports = {
 
         if (validation.error) {
             console.log('validation faild', validation.error);
-            req.flash('err', 'validation failed');
+            req.flash('error', 'validation failed');
             res.redirect('/auth/login');
         } else {
             next();
@@ -66,7 +66,7 @@ module.exports = {
 
         if (validation.error) {
             console.log('validation faild', validation.error);
-            req.flash('err', 'validation failed');
+            req.flash('error', 'validation failed');
             res.redirect('/auth/login');
         } else {
             next();

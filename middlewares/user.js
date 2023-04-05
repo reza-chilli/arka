@@ -17,8 +17,8 @@ module.exports = {
         });
 
         if (validation.error) {
-            req.flash('err', 'validation failed');
-            res.redirect('/auth/login');
+            req.flash('error', 'validation failed');
+            res.redirect('/');
         } else {
             next();
         }

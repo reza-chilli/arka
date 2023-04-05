@@ -15,4 +15,12 @@ module.exports = {
             return new Error('something went wrong');
         }
     },
+    async findOne(query, select, option) {
+        try {
+            return await userModel.findOne(query, select, option);
+        } catch (error) {
+            console.error(`Error in user findOne: ${error}`);
+            return new Error('something went wrong');
+        }
+    }
 };

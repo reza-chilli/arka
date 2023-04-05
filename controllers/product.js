@@ -2,10 +2,20 @@ const productService = require('../services/product');
 
 module.exports = {
     productDataTableRender: (req, res) => {
-        return res.render('products/product');
+        const data = {
+            error: req.flash('error'),
+            success: req.flash('success'),
+        };
+        return res.render('products/product', data);
     },
     addProductRender: (req, res) => {
-        return res.render('products/add', { code: null, title: null });
+        const data = {
+            error: req.flash('error'),
+            success: req.flash('success'),
+            code: null,
+            title: null,
+        };
+        return res.render('products/add', data);
     },
     addProductPostData: async (req, res) => {
         try {
@@ -28,7 +38,13 @@ module.exports = {
                     code = '0' + code;
                 }
             }
-            res.render('products/add', { title, code });
+            const data = {
+                error: req.flash('error'),
+                success: req.flash('success'),
+                title,
+                code,
+            };
+            res.render('products/add', data);
         } catch (error) {
             console.error(`Error in product render: ${error}`);
         }
