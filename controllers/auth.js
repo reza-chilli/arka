@@ -5,11 +5,15 @@ const userServices = require('../services/user');
 
 module.exports = {
     loginController: (req, res) => {
+        if (req.session.details) {
+            req.flash('error', 'you are already authenticated! please logout to start a new session.');
+            return res.redirect('/dashboard/calender');
+        }
+
         const data = {
             error: req.flash('error'),
             success: req.flash('success'),
         };
-
         return res.render('login', data);
     },
 
