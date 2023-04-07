@@ -22,102 +22,145 @@
           </div>
         </div>
     </nav>
-    <hr class="mt-0">
-    <div class="container border px-5 py-3">
-        <form>
-            <div class="row mb-3">
-                <div class="col-3">
-                    <label class="form-label">Project Code</label>
+    <hr class="my-0">
+    <div class="container-fluid border-bottom px-5 py-5">
+        <div class="border-bottom mb-3">
+            <h3 class="fw-light mb-5">Add Project</h3>
+            <form>
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <label class="form-label">Project Code</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" disabled>
+                    </div>
                 </div>
-                <div class="col-9">
-                    <input type="text" class="form-control" disabled>
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <label for="serialNumber" class="form-label">Fixed Serial Number</label>
+                    </div>
+                    <div class="col-9">
+                        <input id="serialNumber" type="text" class="form-control" name="serialNumber">
+                    </div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-3">
-                    <label for="serialNumber" class="form-label">Fixed Serial Number</label>
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <label class="form-label">Product Count</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" disabled>
+                    </div>
                 </div>
-                <div class="col-9">
-                    <input id="serialNumber" type="text" class="form-control" name="serialNumber">
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <label for="projectTitle" class="form-label">Project Title</label>
+                    </div>
+                    <div class="col-9">
+                        <input id="projectTitle" type="text" class="form-control" name="projectTitle">
+                    </div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-3">
-                    <label class="form-label">Product Count</label>
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <label for="firstSerialNo" class="form-label">First Serial Number</label>
+                    </div>
+                    <div class="col-9">
+                        <input id="firstSerialNo" type="text" class="form-control" name="firstSerialNo">
+                    </div>
                 </div>
-                <div class="col-9">
-                    <input type="text" class="form-control" disabled>
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <label for="lastSerialNo" class="form-label">Last Serial Number</label>
+                    </div>
+                    <div class="col-9">
+                        <input id="lastSerialNo" type="text" class="form-control" name="lastSerialNo">
+                    </div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-3">
-                    <label for="projectTitle" class="form-label">Project Title</label>
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <label for="product" class="form-label">product</label>
+                    </div>
+                    <div class="col-9">
+                        <input id="product" type="text" class="form-control" name="product">
+                    </div>
                 </div>
-                <div class="col-9">
-                    <input id="projectTitle" type="text" class="form-control" name="projectTitle">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-3">
-                    <label for="firstSerialNo" class="form-label">First Serial Number</label>
-                </div>
-                <div class="col-9">
-                    <input id="firstSerialNo" type="text" class="form-control" name="firstSerialNo">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-3">
-                    <label for="lastSerialNo" class="form-label">Last Serial Number</label>
-                </div>
-                <div class="col-9">
-                    <input id="lastSerialNo" type="text" class="form-control" name="lastSerialNo">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-3">
-                    <label for="product" class="form-label">product</label>
-                </div>
-                <div class="col-9">
-                    <input id="product" type="text" class="form-control" name="product">
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+            <h3 class="fw-light mb-5">Products</h3>
+            <table id="myTable" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Product Code</th>
+                    <th>Alternate Code</th>
+                    <th>Product Status</th>
+                    <th>NCR Approval</th>
+                    <th>Created On</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
     </div>
     <script>
-        const host = window.location.origin;
+        $(document).ready(function() {
+            const host = window.location.origin;
 
-        $('#saveBtn').on('click', function() {
-            const productTitle = $('#productTitle').val();
-            const data = {
-                title: productTitle,
-            };
-            $.ajax({
-                type: "POST",
-                url: host + '/product/add-product',
-                data,
-                success: function(data) {
-                    console.log('successful');
-                },
-                error: function(xhr, status, error) {
-                    console.log('error');
-                },
+            $('#saveBtn').on('click', function() {
+                const productTitle = $('#productTitle').val();
+                const data = {
+                    title: productTitle,
+                };
+                $.ajax({
+                    type: "POST",
+                    url: host + '/product/add-product',
+                    data,
+                    success: function(data) {
+                        console.log('successful');
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('error');
+                    },
+                });
             });
-        });
-        $('#saveAndCloseBtn').on('click', function() {
-            const productTitle = $('#productTitle').val();
-            const data = {
-                title: productTitle,
-            };
-            $.ajax({
-                type: "POST",
-                url: host + '/product/add-product',
-                data,
-                success: function(data) {
-                    window.location.href = host + '/product';
+            $('#saveAndCloseBtn').on('click', function() {
+                const productTitle = $('#productTitle').val();
+                const data = {
+                    title: productTitle,
+                };
+                $.ajax({
+                    type: "POST",
+                    url: host + '/product/add-product',
+                    data,
+                    success: function(data) {
+                        window.location.href = host + '/product';
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('error');
+                    },
+                });
+            });
+
+            const dataTable = $('#myTable').DataTable({
+                "oLanguage": {
+                    "sSearch": "Search Project",
                 },
-                error: function(xhr, status, error) {
-                    console.log('error');
-                },
+                "processing": true,
+                "serverSide": true,
+                "ordering": false,
+                "pageLength": 10,
+                // "ajax": {
+                //     url: host + '/project/datatable',
+                //     type: 'GET'
+                // },
+                // "columns": [
+                //     { "data": "code" },
+                //     { "data": "title" },
+                //     { "data": "product.title" },
+                //     { "data": "productCount" },
+                //     { "data": "createdAt" }
+                // ],
             });
         });
     </script>
