@@ -1,8 +1,11 @@
 const router = require('express').Router();
+
 const dashboard = require('./dashboard');
 const product = require('./product');
 const project = require('./project');
 const user = require('./user');
+const station = require('./station');
+
 const authMiddleware = require('../middlewares/auth');
 const authController = require('../controllers/auth');
 
@@ -22,5 +25,6 @@ router.use('/dashboard', dashboard);
 router.use('/product', product);
 router.use('/project', project);
 router.use('/user', user);
+router.use('/station', station);
 
 module.exports = router;
