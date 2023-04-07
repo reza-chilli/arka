@@ -3,7 +3,7 @@ const projectModel = require('../models/project');
 module.exports = {
     async find(query, select, option) {
         try {
-            return await projectModel.find(query, select, option);
+            return await projectModel.find(query, select, option).populate('product');
         } catch (error) {
             console.error(`Error in product find: ${error}`);
             return new Error('something went wrong');
@@ -14,8 +14,38 @@ module.exports = {
         try {
             return await projectModel.countDocuments(query);
         } catch (error) {
-            console.error(`Error in product countDocuments: ${error}`);
+            console.error(`Error in project countDocuments: ${error}`);
             return new Error('something went wrong');
+        }
+    },
+
+    async create(data) {
+        try {
+            data.code = await this.getLastProjectCode() + 1;
+
+            const newProject = await projectModel.create(data);
+            if (newProject && !(newProject instanceof Error)) {
+                return newProject;
+            } else {
+                return new Error('something went wrong');
+            }
+        } catch (error) {
+            console.error(`Error in project create: ${error}`);
+            return new Error('something went wrong'); 
+        }
+    },
+
+    async getLastProjectCode() {
+        try {
+            const lastProject = await projectModel.find({}).sort({ code: -1 }).limit(1);
+            if (lastProject.length) {
+                return lastProject[0].code;
+            } else {
+                return 0;
+            }
+
+        } catch (error) {
+            console.error(`Error in project getLastProjectCode: ${error}`);
         }
     },
 }

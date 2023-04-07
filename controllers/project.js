@@ -1,4 +1,5 @@
 const projectService = require('../services/project');
+const productService = require('../services/product');
 
 module.exports = {
     projectRender: (req, res) => {
@@ -46,6 +47,25 @@ module.exports = {
             res.status(200).send(obj);
         } catch (error) {
             console.error(error);
+        }
+    },
+    async addProjectPostData(req, res) {
+        try {
+            const data = req.body;
+            const product = await productService.findOne({ title: data.productTitle });
+            if (!product) {
+                req.flash('error', 'product not fount!');
+                return res.redirect('/project/add-project');
+            }
+            data.product = product._id;
+            data.productCount = parseInt(data.lastSerialNumber - data.firstSerialNumber + 1);
+            const newProject = await projectService.create(data);
+
+            res.status(200).send(String(newProject._id));
+        } catch (error) {
+            console.error(`Error in addProductPostData: ${error}`);
+            req.flash('error', 'internal server error.');
+            return res.redirect('/project/add-project');
         }
     },
 }

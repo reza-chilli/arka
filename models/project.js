@@ -33,6 +33,10 @@ const projectSchema = new Schema(
             type: Number,
             required: true,
         },
+        fixedSerialNumber: {
+            type: Number,
+            required: true,
+        }
     },
     { collection: 'projects', versionKey: false, timestamps: true },
 );

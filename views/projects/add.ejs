@@ -24,7 +24,7 @@
     </nav>
     <hr class="my-0">
     <div class="container-fluid border-bottom px-5 py-5">
-        <div class="border-bottom mb-3">
+        <div class="border-bottom mb-3 col-lg-8 col-md-10 col-sm-12 mx-auto">
             <h3 class="fw-light mb-5">Add Project</h3>
             <form>
                 <div class="row mb-3">
@@ -32,15 +32,15 @@
                         <label class="form-label">Project Code</label>
                     </div>
                     <div class="col-9">
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" id="code" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-3">
-                        <label for="serialNumber" class="form-label">Fixed Serial Number</label>
+                        <label for="fixedSerialNumber" class="form-label">Fixed Serial Number</label>
                     </div>
                     <div class="col-9">
-                        <input id="serialNumber" type="text" class="form-control" name="serialNumber">
+                        <input id="fixedSerialNumber" type="text" class="form-control" name="fixedSerialNumber">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -48,7 +48,7 @@
                         <label class="form-label">Product Count</label>
                     </div>
                     <div class="col-9">
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" id="productCount" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -64,15 +64,15 @@
                         <label for="firstSerialNo" class="form-label">First Serial Number</label>
                     </div>
                     <div class="col-9">
-                        <input id="firstSerialNo" type="text" class="form-control" name="firstSerialNo">
+                        <input id="firstSerialNumber" type="text" class="form-control" name="firstSerialNumber">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-3">
-                        <label for="lastSerialNo" class="form-label">Last Serial Number</label>
+                        <label for="lastSerialNumber" class="form-label">Last Serial Number</label>
                     </div>
                     <div class="col-9">
-                        <input id="lastSerialNo" type="text" class="form-control" name="lastSerialNo">
+                        <input id="lastSerialNumber" type="text" class="form-control" name="lastSerialNumber">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -108,13 +108,21 @@
             const host = window.location.origin;
 
             $('#saveBtn').on('click', function() {
-                const productTitle = $('#productTitle').val();
+                const fixedSerialNumber = $('#fixedSerialNumber').val();
+                const projectTitle = $('#projectTitle').val();
+                const firstSerialNumber = $('#firstSerialNumber').val();
+                const lastSerialNumber = $('#lastSerialNumber').val();
+                const productTitle = $('#product').val();
                 const data = {
-                    title: productTitle,
+                    fixedSerialNumber,
+                    firstSerialNumber,
+                    lastSerialNumber,
+                    projectTitle,
+                    product: productTitle,
                 };
                 $.ajax({
                     type: "POST",
-                    url: host + '/product/add-product',
+                    url: host + '/project/add-project',
                     data,
                     success: function(data) {
                         console.log('successful');
@@ -125,16 +133,24 @@
                 });
             });
             $('#saveAndCloseBtn').on('click', function() {
-                const productTitle = $('#productTitle').val();
+                const fixedSerialNumber = $('#fixedSerialNumber').val();
+                const projectTitle = $('#projectTitle').val();
+                const firstSerialNumber = $('#firstSerialNumber').val();
+                const lastSerialNumber = $('#lastSerialNumber').val();
+                const productTitle = $('#product').val();
                 const data = {
-                    title: productTitle,
+                    fixedSerialNumber,
+                    firstSerialNumber,
+                    lastSerialNumber,
+                    title: projectTitle,
+                    productTitle,
                 };
                 $.ajax({
                     type: "POST",
-                    url: host + '/product/add-product',
+                    url: host + '/project/add-project',
                     data,
                     success: function(data) {
-                        window.location.href = host + '/product';
+                        window.location.href = host + '/project';
                     },
                     error: function(xhr, status, error) {
                         console.log('error');
