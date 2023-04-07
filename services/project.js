@@ -48,4 +48,20 @@ module.exports = {
             console.error(`Error in project getLastProjectCode: ${error}`);
         }
     },
+    async deleteMany(data) {
+        try {
+            return await projectModel.deleteMany(data);
+        } catch (error) {
+            console.error(`Error in product deleteMany: ${error}`);
+            return new Error('something went wrong');
+        }
+    },
+    async updateMany(data, query, option) {
+        try {
+            return await projectModel.updateMany(data, query, option);
+        } catch (error) {
+            console.error(`Error in product updateMany: ${error}`);
+            return new Error('something went wrong'); 
+        }
+    },
 }

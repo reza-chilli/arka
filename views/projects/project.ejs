@@ -16,7 +16,13 @@
                     <a class="nav-link" aria-current="page" href="/project/add-project">New</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Delete</a>
+                    <button class="nav-link btn" id="deleteProject">Delete</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn" id="activateProject">Activate</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn" id="deactivateProject">Deactivate</button>
                 </li>
             </ul>
           </div>
@@ -27,7 +33,7 @@
         <table id="myTable" class="table table-bordered table-striped col-4">
             <thead>
                 <div class="mb-3 container d-flex px-0 justify-content-between">
-                    <h3>Products</h3>
+                    <h2 class="fw-light">Projects</h2>
                     <div class="col-2">
                         <select class="form-select" id="status">
                             <option value="all">All</option>
@@ -105,9 +111,79 @@
                     { "data": "createdAt" }
                 ],
             });
+            $('#myTable tbody').on('click', '.row-checkbox', function () {
+                $(this).parent().parent().toggleClass('selected');
+            });
             $('#status').on('change', function() {
                 dataTable.draw();
             });
+            $('#deleteProject').on('click', function() {
+                const ids = grabSelectedItemsId();
+                if (!ids.length) {
+                    return null;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: host + '/project/delete-project',
+                    data: {
+                        ids,
+                    },
+                    success: function(data) {
+                        dataTable.draw();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('error');
+                    },
+                });
+            });
+            $('#deactivateProject').on('click', function() {
+                const ids = grabSelectedItemsId();
+                if (!ids.length) {
+                    return null;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: host + '/project/deactivate-project',
+                    data: {
+                        ids,
+                    },
+                    success: function(data) {
+                        dataTable.draw();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('error');
+                    },
+                });
+            });
+            $('#activateProject').on('click', function() {
+                const ids = grabSelectedItemsId();
+                if (!ids.length) {
+                    return null;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: host + '/project/activate-project',
+                    data: {
+                        ids,
+                    },
+                    success: function(data) {
+                        dataTable.draw();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('error');
+                    },
+                });
+            });
+            function grabSelectedItemsId() {
+                const ids = [];
+                const selectedItems = dataTable.rows('.selected').data();
+                for (let i = 0; i < selectedItems.length; i++) {
+                    ids.push(selectedItems[i]._id);
+                }
+                return ids;
+            }
         });
     </script>
 </body>
