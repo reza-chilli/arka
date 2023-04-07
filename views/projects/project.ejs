@@ -27,6 +27,7 @@
         <table id="myTable" class="table table-bordered table-striped col-4">
             <thead>
             <tr>
+                <th></th>
                 <th>Project Code</th>
                 <th>Project Title</th>
                 <th>Product</th>
@@ -59,9 +60,24 @@
                     type: 'GET'
                 },
                 "columns": [
-                    { "data": "code" },
+                    {
+                        render: function() {
+                            return '<input class="form-check-input row-checkbox" type="checkbox" value="">';
+                        }
+                    },
+                    { 
+                        "data": "code",
+                        render: function(data, type, row) {
+                            return `<a class="link-dark" href="/product/add-project/${row._id}">${row.code}</a>`;
+                        },
+                    },
                     { "data": "title" },
-                    { "data": "product.title" },
+                    { 
+                        "data": "product.title",
+                        render: function(data, type, row) {
+                            return `<a class="link-dark" href="/product/add-product/${row.product._id}">${row.product.title}</a>`;
+                        },
+                    },
                     { "data": "productCount" },
                     { "data": "createdAt" }
                 ],
