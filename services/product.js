@@ -4,10 +4,10 @@ module.exports = {
     async create(data) {
         try {
             data.code = await this.getLastProductCode() + 1;
-            const product = await productModel.create(data);
+            const newProduct = await productModel.create(data);
 
-            if (product && !(product instanceof Error)) {
-                return product;
+            if (newProduct && !(newProduct instanceof Error)) {
+                return newProduct;
             } else {
                 return new Error('something went wrong');
             }
