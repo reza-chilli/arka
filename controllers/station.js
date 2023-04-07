@@ -1,4 +1,5 @@
 const stationService = require('../services/station');
+const productService =  require('../services/product');
 
 module.exports = {
     stationDataTableRender: function(req, res) {
@@ -8,25 +9,30 @@ module.exports = {
         };
         return res.render('stations/station', data);
     },
-    // addProductRender: (req, res) => {
-    //     const data = {
-    //         error: req.flash('error'),
-    //         success: req.flash('success'),
-    //         code: null,
-    //         title: null,
-    //     };
-    //     return res.render('products/add', data);
-    // },
-    // addProductPostData: async (req, res) => {
-    //     try {
-    //         const data = req.body;
-    //         const newProduct = await productService.create(data);
+    addStationRender: function(req, res) {
+        const data = {
+            error: req.flash('error'),
+            success: req.flash('success'),
+            code: null,
+            title: null,
+        };
+        return res.render('stations/add', data);
+    },
+    async addStationPostData(req, res) {
+        try {
+            const data = req.body;
+            const product = await productService.findOne({ title: data.productTitle });
+            if (!product) {
+                return res.status(400).send('product not found.');
+            }
+            data.product = product._id;
+            const newStation = await stationService.create(data);
 
-    //         res.status(200).send(String(newProduct._id));
-    //     } catch (error) {
-    //         console.error(`Error in addProductPostData: ${error}`);
-    //     }
-    // },
+            res.status(200).send(String(newStation._id));
+        } catch (error) {
+            console.error(`Error in addProductPostData: ${error}`);
+        }
+    },
     // async productRender(req, res) {
     //     try {
     //         const { productId } = req.params;

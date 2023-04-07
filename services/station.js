@@ -18,7 +18,7 @@ module.exports = {
     },
     async find(query, select, option) {
         try {
-            return await stationModel.find(query, select, option);
+            return await stationModel.find(query, select, option).populate('product');
         } catch (error) {
             console.error(`Error in station find: ${error}`);
             return new Error('something went wrong');

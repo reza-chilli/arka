@@ -85,11 +85,16 @@
                         }
                     },
                     { "data": "title" },
-                    { "data": "stationNO" },
                     { 
                         "data": "product.title",
                         render: function(data, type, row) {
                             return `<a class="link-dark" href="/product/add-product/${row.product._id}">${row.product.title}</a>`;
+                        },
+                    },
+                    {
+                        "data": "stationNO",
+                        render: function(data, type, row) {
+                            return `st-${row.stationNO}`;
                         },
                     },
                     { 
