@@ -26,14 +26,25 @@
     <div class="container">
         <table id="myTable" class="table table-bordered table-striped col-4">
             <thead>
-            <tr>
-                <th></th>
-                <th>Project Code</th>
-                <th>Project Title</th>
-                <th>Product</th>
-                <th>Product Count</th>
-                <th>Created On</th>
-            </tr>
+                <div class="mb-3 container d-flex px-0 justify-content-between">
+                    <h3>Products</h3>
+                    <div class="col-2">
+                        <select class="form-select" id="status">
+                            <option value="all">All</option>
+                            <option selected value="active">Active</option>
+                            <option value="deactive">Deactive</option>
+                        </select>
+                    </div>
+                </div>
+                <tr>
+                    <th></th>
+                    <th>Project Code</th>
+                    <th>Project Title</th>
+                    <th>Product</th>
+                    <th>Product Count</th>
+                    <th>Status</th>
+                    <th>Created On</th>
+                </tr>
             </thead>
             <tbody>
             </tbody>
@@ -57,7 +68,10 @@
                 },
                 "ajax": {
                     url: host + '/project/datatable',
-                    type: 'GET'
+                    type: 'POST',
+                    data: function(d) {
+                        d.status = $('#status').find(":selected").val();
+                    },
                 },
                 "columns": [
                     {
@@ -79,8 +93,20 @@
                         },
                     },
                     { "data": "productCount" },
+                    { 
+                        "data": "active",
+                        render: function(data, type, row) {
+                            if (row.active) {
+                                return 'Active';
+                            }
+                            return 'Deactive'
+                        },
+                    },
                     { "data": "createdAt" }
                 ],
+            });
+            $('#status').on('change', function() {
+                dataTable.draw();
             });
         });
     </script>

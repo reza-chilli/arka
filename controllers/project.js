@@ -24,14 +24,19 @@ module.exports = {
 
     async projectDataTable(req, res) {
         try {
-            const start = parseInt(req.query.start);
-            const length = parseInt(req.query.length);
-            const search = req.query.search.value;
+            const start = parseInt(req.body.start);
+            const length = parseInt(req.body.length);
+            const search = req.body.search.value;
             const sanitizedSearch = escape(search);
             const query = {};
 
             if (search !== '') {
                 query.title = { $regex: `.*${sanitizedSearch}.*` };
+            }
+            if (req.body.status == 'active') {
+                query.active = true;
+            } else if (req.body.status == 'deactive') {
+                query.active = false;
             }
 
             const projectCount = await projectService.countDocuments({});
