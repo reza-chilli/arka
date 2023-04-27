@@ -52,7 +52,7 @@ module.exports = {
         try {
             return await projectModel.deleteMany(data);
         } catch (error) {
-            console.error(`Error in product deleteMany: ${error}`);
+            console.error(`Error in project deleteMany: ${error}`);
             return new Error('something went wrong');
         }
     },
@@ -60,8 +60,16 @@ module.exports = {
         try {
             return await projectModel.updateMany(data, query, option);
         } catch (error) {
-            console.error(`Error in product updateMany: ${error}`);
+            console.error(`Error in project updateMany: ${error}`);
             return new Error('something went wrong'); 
+        }
+    },
+    async findOne(query, select, option) {
+        try {
+            return await projectModel.findOne(query, select, option).populate('product');
+        } catch (error) {
+            console.error(`Error in project findOne: ${error}`);
+            return new Error('something went wrong');
         }
     },
 }

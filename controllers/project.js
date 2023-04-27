@@ -2,7 +2,7 @@ const projectService = require('../services/project');
 const productService = require('../services/product');
 
 module.exports = {
-    projectRender: (req, res) => {
+    projectDataTableRender: (req, res) => {
         const data = {
             error: req.flash('error'),
             success: req.flash('success'),
@@ -15,6 +15,7 @@ module.exports = {
             const data = {
                 error: req.flash('error'),
                 success: req.flash('success'),
+                projectData: null,
             };
             return res.render('projects/add', data);
         } catch (error) {
@@ -109,6 +110,36 @@ module.exports = {
             res.status(200).send();
         } catch (error) {
             console.error(`Error in activateProductPostData: ${error}`);
+        }
+    },
+    async projectRender(req, res) {
+        try {
+            const { projectId } = req.params;
+            let { title, code, productCount, firstSerialNumber, lastSerialNumber, fixedSerialNumber, product } = await projectService.findOne({ _id: projectId });
+            code = code.toString();
+            const codeLength = code.length;
+            if (code.length < 3) {
+                for (let i = 0; i < 3 - codeLength; i++) {
+                    code = '0' + code;
+                }
+            }
+            const projectData = {
+                title,
+                code,
+                productCount,
+                firstSerialNumber,
+                lastSerialNumber,
+                fixedSerialNumber,
+                productTitle: product.title,
+            };
+            const data = {
+                error: req.flash('error'),
+                success: req.flash('success'),
+                projectData,
+            };
+            res.render('projects/add', data);
+        } catch (error) {
+            console.error(`Error in project render: ${error}`);
         }
     },
 }

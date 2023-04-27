@@ -32,7 +32,7 @@
                         <label class="form-label">Project Code</label>
                     </div>
                     <div class="col-9">
-                        <input type="text" id="code" class="form-control" disabled>
+                        <input type="text" id="code" class="form-control" value="<%= projectData ? 'pr-' + projectData.code : '' %>" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -40,7 +40,7 @@
                         <label for="fixedSerialNumber" class="form-label">Fixed Serial Number</label>
                     </div>
                     <div class="col-9">
-                        <input id="fixedSerialNumber" type="text" class="form-control" name="fixedSerialNumber">
+                        <input id="fixedSerialNumber" type="text" class="form-control" name="fixedSerialNumber" value="<%= projectData ? projectData.fixedSerialNumber : '' %>">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -48,7 +48,7 @@
                         <label class="form-label">Product Count</label>
                     </div>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="productCount" disabled>
+                        <input type="text" class="form-control" id="productCount" value="<%= projectData ? projectData.productCount : '' %>" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -56,7 +56,7 @@
                         <label for="projectTitle" class="form-label">Project Title</label>
                     </div>
                     <div class="col-9">
-                        <input id="projectTitle" type="text" class="form-control" name="projectTitle">
+                        <input id="projectTitle" type="text" class="form-control" name="projectTitle" value="<%= projectData ? projectData.title : '' %>">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -64,7 +64,7 @@
                         <label for="firstSerialNo" class="form-label">First Serial Number</label>
                     </div>
                     <div class="col-9">
-                        <input id="firstSerialNumber" type="text" class="form-control" name="firstSerialNumber">
+                        <input id="firstSerialNumber" type="text" class="form-control" name="firstSerialNumber" value="<%= projectData ? projectData.firstSerialNumber : '' %>">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -72,7 +72,7 @@
                         <label for="lastSerialNumber" class="form-label">Last Serial Number</label>
                     </div>
                     <div class="col-9">
-                        <input id="lastSerialNumber" type="text" class="form-control" name="lastSerialNumber">
+                        <input id="lastSerialNumber" type="text" class="form-control" name="lastSerialNumber" value="<%= projectData ? projectData.lastSerialNumber : '' %>">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -80,7 +80,7 @@
                         <label for="product" class="form-label">product</label>
                     </div>
                     <div class="col-9">
-                        <input id="product" type="text" class="form-control" name="product">
+                        <input id="product" type="text" class="form-control" name="product" value="<%= projectData ? projectData.productTitle : '' %>">
                     </div>
                 </div>
             </form>
@@ -125,7 +125,7 @@
                     url: host + '/project/add-project',
                     data,
                     success: function(data) {
-                        console.log('successful');
+                        window.location.href = host + '/project/add-project/' + data;
                     },
                     error: function(xhr, status, error) {
                         console.log('error');
