@@ -32,7 +32,7 @@
                         <label class="form-label">Project Code</label>
                     </div>
                     <div class="col-9">
-                        <input type="text" id="code" class="form-control" value="<%= projectData ? 'pr-' + projectData.code : '' %>" disabled>
+                        <input type="text" id="code" class="form-control" value="<%= projectData ? 'PR-' + projectData.code : '' %>" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -85,6 +85,7 @@
                 </div>
             </form>
         </div>
+        <% if (projectData) { %>
         <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
             <h3 class="fw-light mb-5">Products</h3>
             <table id="myTable" class="table table-bordered table-striped">
@@ -102,6 +103,7 @@
                 </tbody>
             </table>
         </div>
+        <% } %>
     </div>
     <script>
         $(document).ready(function() {
@@ -117,8 +119,8 @@
                     fixedSerialNumber,
                     firstSerialNumber,
                     lastSerialNumber,
-                    projectTitle,
-                    product: productTitle,
+                    title: projectTitle,
+                    productTitle,
                 };
                 $.ajax({
                     type: "POST",

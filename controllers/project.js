@@ -118,8 +118,8 @@ module.exports = {
             let { title, code, productCount, firstSerialNumber, lastSerialNumber, fixedSerialNumber, product } = await projectService.findOne({ _id: projectId });
             code = code.toString();
             const codeLength = code.length;
-            if (code.length < 3) {
-                for (let i = 0; i < 3 - codeLength; i++) {
+            if (code.length < 5) {
+                for (let i = 0; i < 5 - codeLength; i++) {
                     code = '0' + code;
                 }
             }
