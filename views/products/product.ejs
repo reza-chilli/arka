@@ -96,7 +96,12 @@
                             return 'Deactive'
                         },
                     },
-                    { "data": "createdAt" }
+                    { 
+                        "data": "createdAt",
+                        render: function(data, type, row) {
+                            return moment(row.createdAt).format('YYYY/MM/DD HH:mm').split(' ').join('&nbsp;&nbsp;');
+                        }
+                    }
                 ],
             });
             $('#myTable tbody').on('click', '.row-checkbox', function () {
