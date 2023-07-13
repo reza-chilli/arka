@@ -8,57 +8,64 @@
 </head>
 <body>
     <%- include('../partitions/navbar') %>
-    <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1;">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <button class="btn" id="saveBtn">Save</button>
-                </li>
-                <li class="nav-item">
-                    <button class="btn" id="saveAndCloseBtn">Save & Close</button>
-                </li>
-            </ul>
-          </div>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <%- include('../partitions/sidebar') %>
+            <div class="col">
+                <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1;">
+                    <div class="container-fluid">
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <button class="btn" id="saveBtn">Save</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn" id="saveAndCloseBtn">Save & Close</button>
+                            </li>
+                        </ul>
+                      </div>
+                    </div>
+                </nav>
+                <hr class="mt-0">
+                <div class="container border px-5 py-3">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label for="exampleInputEmail1" class="form-label">Station Code</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control" value="<%= code ? 'pr-' + code : '' %>" disabled>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label for="stationTitle" class="form-label">Station Title</label>
+                            </div>
+                            <div class="col-9">
+                                <input id="stationTitle" type="text" value="<%= title ? title : '' %>" class="form-control" name="stationTitle">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label for="productTitle" class="form-label">Product</label>
+                            </div>
+                            <div class="col-9">
+                                <input id="productTitle" type="text" value="<%= title ? title : '' %>" class="form-control" name="productTitle">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="stationNO" class="form-label">Station Number</label>
+                            </div>
+                            <div class="col-9">
+                                <input id="stationNO" type="text" value="<%= title ? title : '' %>" class="form-control" name="stationNO">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </nav>
-    <hr class="mt-0">
-    <div class="container border px-5 py-3">
-        <form>
-            <div class="row mb-3">
-                <div class="col-3">
-                    <label for="exampleInputEmail1" class="form-label">Station Code</label>
-                </div>
-                <div class="col-9">
-                    <input type="text" class="form-control" value="<%= code ? 'pr-' + code : '' %>" disabled>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-3">
-                    <label for="stationTitle" class="form-label">Station Title</label>
-                </div>
-                <div class="col-9">
-                    <input id="stationTitle" type="text" value="<%= title ? title : '' %>" class="form-control" name="stationTitle">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-3">
-                    <label for="productTitle" class="form-label">Product</label>
-                </div>
-                <div class="col-9">
-                    <input id="productTitle" type="text" value="<%= title ? title : '' %>" class="form-control" name="productTitle">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3">
-                    <label for="stationNO" class="form-label">Station Number</label>
-                </div>
-                <div class="col-9">
-                    <input id="stationNO" type="text" value="<%= title ? title : '' %>" class="form-control" name="stationNO">
-                </div>
-            </div>
-        </form>
-    </div>
+      </div>
     <script>
         const host = window.location.origin;
 

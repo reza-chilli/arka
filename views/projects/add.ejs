@@ -8,103 +8,110 @@
 </head>
 <body>
     <%- include('../partitions/navbar') %>
-    <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1;">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <button class="btn" id="saveBtn">Save</button>
-                </li>
-                <li class="nav-item">
-                    <button class="btn" id="saveAndCloseBtn">Save & Close</button>
-                </li>
-            </ul>
-          </div>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <%- include('../partitions/sidebar') %>
+            <div class="col">
+                <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1;">
+                    <div class="container-fluid">
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <button class="btn" id="saveBtn">Save</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn" id="saveAndCloseBtn">Save & Close</button>
+                            </li>
+                        </ul>
+                      </div>
+                    </div>
+                </nav>
+                <hr class="my-0">
+                <div class="container-fluid border-bottom px-5 py-5">
+                    <div class="border-bottom mb-3 col-lg-8 col-md-10 col-sm-12 mx-auto">
+                        <h3 class="fw-light mb-5">Add Project</h3>
+                        <form>
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <label class="form-label">Project Code</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="code" class="form-control" value="<%= projectData ? 'PR-' + projectData.code : '' %>" disabled>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <label for="fixedSerialNumber" class="form-label">Fixed Serial Number</label>
+                                </div>
+                                <div class="col-9">
+                                    <input id="fixedSerialNumber" type="text" class="form-control" name="fixedSerialNumber" value="<%= projectData ? projectData.fixedSerialNumber : '' %>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <label class="form-label">Product Count</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" class="form-control" id="productCount" value="<%= projectData ? projectData.productCount : '' %>" disabled>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <label for="projectTitle" class="form-label">Project Title</label>
+                                </div>
+                                <div class="col-9">
+                                    <input id="projectTitle" type="text" class="form-control" name="projectTitle" value="<%= projectData ? projectData.title : '' %>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <label for="firstSerialNo" class="form-label">First Serial Number</label>
+                                </div>
+                                <div class="col-9">
+                                    <input id="firstSerialNumber" type="text" class="form-control" name="firstSerialNumber" value="<%= projectData ? projectData.firstSerialNumber : '' %>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <label for="lastSerialNumber" class="form-label">Last Serial Number</label>
+                                </div>
+                                <div class="col-9">
+                                    <input id="lastSerialNumber" type="text" class="form-control" name="lastSerialNumber" value="<%= projectData ? projectData.lastSerialNumber : '' %>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <label for="product" class="form-label">product</label>
+                                </div>
+                                <div class="col-9">
+                                    <input id="product" type="text" class="form-control" name="product" value="<%= projectData ? projectData.productTitle : '' %>">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <% if (projectData) { %>
+                    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+                        <h3 class="fw-light mb-5">Products</h3>
+                        <table id="myTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Product Code</th>
+                                <th>Alternate Code</th>
+                                <th>Product Status</th>
+                                <th>NCR Approval</th>
+                                <th>Created On</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
         </div>
-    </nav>
-    <hr class="my-0">
-    <div class="container-fluid border-bottom px-5 py-5">
-        <div class="border-bottom mb-3 col-lg-8 col-md-10 col-sm-12 mx-auto">
-            <h3 class="fw-light mb-5">Add Project</h3>
-            <form>
-                <div class="row mb-3">
-                    <div class="col-3">
-                        <label class="form-label">Project Code</label>
-                    </div>
-                    <div class="col-9">
-                        <input type="text" id="code" class="form-control" value="<%= projectData ? 'PR-' + projectData.code : '' %>" disabled>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-3">
-                        <label for="fixedSerialNumber" class="form-label">Fixed Serial Number</label>
-                    </div>
-                    <div class="col-9">
-                        <input id="fixedSerialNumber" type="text" class="form-control" name="fixedSerialNumber" value="<%= projectData ? projectData.fixedSerialNumber : '' %>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-3">
-                        <label class="form-label">Product Count</label>
-                    </div>
-                    <div class="col-9">
-                        <input type="text" class="form-control" id="productCount" value="<%= projectData ? projectData.productCount : '' %>" disabled>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-3">
-                        <label for="projectTitle" class="form-label">Project Title</label>
-                    </div>
-                    <div class="col-9">
-                        <input id="projectTitle" type="text" class="form-control" name="projectTitle" value="<%= projectData ? projectData.title : '' %>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-3">
-                        <label for="firstSerialNo" class="form-label">First Serial Number</label>
-                    </div>
-                    <div class="col-9">
-                        <input id="firstSerialNumber" type="text" class="form-control" name="firstSerialNumber" value="<%= projectData ? projectData.firstSerialNumber : '' %>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-3">
-                        <label for="lastSerialNumber" class="form-label">Last Serial Number</label>
-                    </div>
-                    <div class="col-9">
-                        <input id="lastSerialNumber" type="text" class="form-control" name="lastSerialNumber" value="<%= projectData ? projectData.lastSerialNumber : '' %>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-3">
-                        <label for="product" class="form-label">product</label>
-                    </div>
-                    <div class="col-9">
-                        <input id="product" type="text" class="form-control" name="product" value="<%= projectData ? projectData.productTitle : '' %>">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <% if (projectData) { %>
-        <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
-            <h3 class="fw-light mb-5">Products</h3>
-            <table id="myTable" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th>Project</th>
-                    <th>Product Code</th>
-                    <th>Alternate Code</th>
-                    <th>Product Status</th>
-                    <th>NCR Approval</th>
-                    <th>Created On</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <% } %>
-    </div>
+      </div>
     <script>
         $(document).ready(function() {
             const host = window.location.origin;
