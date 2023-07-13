@@ -25,6 +25,8 @@ module.exports = {
             req.flash('error', 'please login!');
             return res.redirect('/');
         } else {
+            res.locals.firstname = req.session.details.firstname;
+            res.locals.lastname = req.session.details.lastname;
             next();
         }
     },

@@ -20,7 +20,7 @@ const authController = require('../controllers/auth');
 router.get('/', authController.loginController);
 router.post('/login', authMiddleware.loginPostValidate, authController.loginPostController);
 
-// router.use('/', authMiddleware.loginCheck);
+router.use('/', authMiddleware.loginCheck);
 router.use('/dashboard', dashboard);
 router.use('/product', product);
 router.use('/project', project);
