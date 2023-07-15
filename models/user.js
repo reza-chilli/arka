@@ -28,10 +28,17 @@ const userSchema = new Schema({
       required : true,
       trim : true
     },
-    role : {
-      type : String,
-      default : 'qcAgent'
-    }
+    role: {
+      type: String,
+      default: 'qcAgent'
+    },
+    settings: {
+      recordPerPage: {
+        type: Number,
+        default: 10,
+        enum: [10, 25, 50, 100],
+      }
+    },
 });
 
 userSchema.pre('save', function(next) {
