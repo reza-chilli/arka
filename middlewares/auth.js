@@ -27,6 +27,7 @@ module.exports = {
         } else {
             res.locals.firstname = req.session.details.firstname;
             res.locals.lastname = req.session.details.lastname;
+            res.locals.settings = req.session.details.settings;
             next();
         }
     },

@@ -37,6 +37,7 @@ module.exports = {
                 lastname: user.lastname,
                 phoneNumber: user.phoneNumber,
                 role: user.role,
+                settings: user.settings,
             };
             req.flash('success', `welcome to panel ${user.firstname} ${user.lastname}`);
             return res.redirect('/dashboard/calender');

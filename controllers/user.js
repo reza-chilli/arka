@@ -40,8 +40,14 @@ module.exports = {
         { $set: { settings } }, 
         { new: true }
       );
-      req.flash('success', 'settings updated successfully');
-      return res.redirect('/user/settings');
+
+      req.session.details.settings = userUpdate.settings;
+      req.session.save((err) => {
+        req.session.reload((err) => {
+          req.flash('success', 'settings updated successfully');
+          return res.redirect('/user/settings');
+        });
+      });
     } catch (error) {
       console.error(`Error in updateSettingsPostData: ${error}`);       
     }

@@ -23,10 +23,10 @@
                 </div>
                 <div class="col-9">
                   <select class="form-select" name="recordPerPage" id="recordPerPage">
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                    <option value="10" <% if (settings.recordPerPage === 10) {%> selected <% } %> >10</option>
+                    <option value="25" <% if (settings.recordPerPage === 25) {%> selected <% } %> >25</option>
+                    <option value="50" <% if (settings.recordPerPage === 50) {%> selected <% } %> >50</option>
+                    <option value="100" <% if (settings.recordPerPage === 100) {%> selected <% } %> >100</option>
                   </select>
                 </div>
               </div>

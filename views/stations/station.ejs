@@ -1,196 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arka</title>
-</head>
-<body>
+  </head>
+  <body>
     <%- include('../partitions/navbar') %>
     <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <%- include('../partitions/sidebar') %>
-            <div class="col">
-                <%- include('../partitions/notification') %>
-                <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1;">
-                    <div class="container-fluid">
-                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="/station/add-station">New</a>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link btn" id="deleteStation">Delete</button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link btn" id="activateStation">Activate</button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link btn" id="deactivateStation">Deactivate</button>
-                            </li>
-                        </ul>
-                      </div>
-                    </div>
-                </nav>
-                <hr class="mt-0">
-                <div class="container">
-                    <table id="myTable" class="table table-bordered table-striped col-4">
-                        <thead>
-                            <div class="mb-3 container d-flex px-0 justify-content-between">
-                                <h2 class="fw-light">Stations</h2>
-                                <div class="col-2">
-                                    <select class="form-select" id="status">
-                                        <option value="all">All</option>
-                                        <option selected value="active">Active</option>
-                                        <option value="deactive">Deactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <tr>
-                                <th></th>
-                                <th>Station Title</th>
-                                <th>Product</th>
-                                <th>Station NO</th>
-                                <th>Status</th>
-                                <th>Created On</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
+      <div class="row flex-nowrap">
+        <%- include('../partitions/sidebar') %>
+        <div class="col">
+          <%- include('../partitions/notification') %>
+          <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1">
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/station/add-station">New</a>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link btn" id="deleteStation">
+                      Delete
+                    </button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link btn" id="activateStation">
+                      Activate
+                    </button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link btn" id="deactivateStation">
+                      Deactivate
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </nav>
+          <hr class="mt-0" />
+          <div class="container">
+            <table
+              id="myTable"
+              class="table table-bordered table-striped col-4"
+            >
+              <thead>
+                <div class="mb-3 container d-flex px-0 justify-content-between">
+                  <h2 class="fw-light">Stations</h2>
+                  <div class="col-2">
+                    <select class="form-select" id="status">
+                      <option value="all">All</option>
+                      <option selected value="active">Active</option>
+                      <option value="deactive">Deactive</option>
+                    </select>
+                  </div>
+                </div>
+                <tr>
+                  <th></th>
+                  <th>Station Title</th>
+                  <th>Product</th>
+                  <th>Station NO</th>
+                  <th>Status</th>
+                  <th>Created On</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
       </div>
+    </div>
     <script>
-        $(document).ready(function() {
-            const host = window.location.origin;
+      $(document).ready(function () {
+        const host = window.location.origin;
 
-            const dataTable = $('#myTable').DataTable({
-                "oLanguage": {
-                    "sSearch": "Search Station",
-                },
-                "processing": true,
-                "serverSide": true,
-                "ordering": false,
-                "autoWidth": false,
-                "pageLength": 10,
-                "select": {
-                    "style": 'multi'
-                },
-                "ajax": {
-                    url: host + '/station/datatable',
-                    type: 'POST',
-                    data: function(d) {
-                        d.status = $('#status').find(":selected").val();
-                    },
-                },
-                "columns": [
-                    {
-                        render: function() {
-                            return '<input class="form-check-input row-checkbox" type="checkbox" value="">';
-                        }
-                    },
-                    { "data": "title" },
-                    { 
-                        "data": "product.title",
-                        render: function(data, type, row) {
-                            return `<a class="link-dark" href="/product/add-product/${row.product._id}">${row.product.title}</a>`;
-                        },
-                    },
-                    {
-                        "data": "stationNO",
-                        render: function(data, type, row) {
-                            return `st-${row.stationNO}`;
-                        },
-                    },
-                    { 
-                        "data": "active",
-                        render: function(data, type, row) {
-                            if (row.active) {
-                                return 'Active';
-                            }
-                            return 'Deactive'
-                        },
-                    },
-                    { "data": "createdAt" }
-                ],
-            });
-            $('#myTable tbody').on('click', '.row-checkbox', function () {
-                $(this).parent().parent().toggleClass('selected');
-            });
-            $('#status').on('change', function() {
-                dataTable.draw();
-            });
-            $('#deleteStation').on('click', function() {
-                const ids = grabSelectedItemsId();
-                if (!ids.length) {
-                    return null;
+        const dataTable = $("#myTable").DataTable({
+          oLanguage: {
+            sSearch: "Search Station",
+          },
+          processing: true,
+          serverSide: true,
+          ordering: false,
+          autoWidth: false,
+          pageLength: "<%= settings.recordPerPage %>" ? "<%= settings.recordPerPage %>" : 10,
+          select: {
+            style: "multi",
+          },
+          ajax: {
+            url: host + "/station/datatable",
+            type: "POST",
+            data: function (d) {
+              d.status = $("#status").find(":selected").val();
+            },
+          },
+          columns: [
+            {
+              render: function () {
+                return '<input class="form-check-input row-checkbox" type="checkbox" value="">';
+              },
+            },
+            { data: "title" },
+            {
+              data: "product.title",
+              render: function (data, type, row) {
+                return `<a class="link-dark" href="/product/add-product/${row.product._id}">${row.product.title}</a>`;
+              },
+            },
+            {
+              data: "stationNO",
+              render: function (data, type, row) {
+                return `st-${row.stationNO}`;
+              },
+            },
+            {
+              data: "active",
+              render: function (data, type, row) {
+                if (row.active) {
+                  return "Active";
                 }
-                $.ajax({
-                    type: "POST",
-                    url: host + '/station/delete-station',
-                    data: {
-                        ids,
-                    },
-                    success: function(data) {
-                        dataTable.draw();
-                    },
-                    error: function(xhr, status, error) {
-                        console.log('error');
-                    },
-                });
-            });
-            $('#deactivateStation').on('click', function() {
-                const ids = grabSelectedItemsId();
-                if (!ids.length) {
-                    return null;
-                }
-
-                $.ajax({
-                    type: "POST",
-                    url: host + '/station/deactivate-station',
-                    data: {
-                        ids,
-                    },
-                    success: function(data) {
-                        dataTable.draw();
-                    },
-                    error: function(xhr, status, error) {
-                        console.log('error');
-                    },
-                });
-            });
-            $('#activateStation').on('click', function() {
-                const ids = grabSelectedItemsId();
-                if (!ids.length) {
-                    return null;
-                }
-
-                $.ajax({
-                    type: "POST",
-                    url: host + '/station/activate-station',
-                    data: {
-                        ids,
-                    },
-                    success: function(data) {
-                        dataTable.draw();
-                    },
-                    error: function(xhr, status, error) {
-                        console.log('error');
-                    },
-                });
-            });
-            function grabSelectedItemsId() {
-                const ids = [];
-                const selectedItems = dataTable.rows('.selected').data();
-                for (let i = 0; i < selectedItems.length; i++) {
-                    ids.push(selectedItems[i]._id);
-                }
-                return ids;
-            }
+                return "Deactive";
+              },
+            },
+            { data: "createdAt" },
+          ],
         });
+        $("#myTable tbody").on("click", ".row-checkbox", function () {
+          $(this).parent().parent().toggleClass("selected");
+        });
+        $("#status").on("change", function () {
+          dataTable.draw();
+        });
+        $("#deleteStation").on("click", function () {
+          const ids = grabSelectedItemsId();
+          if (!ids.length) {
+            return null;
+          }
+          $.ajax({
+            type: "POST",
+            url: host + "/station/delete-station",
+            data: {
+              ids,
+            },
+            success: function (data) {
+              dataTable.draw();
+            },
+            error: function (xhr, status, error) {
+              console.log("error");
+            },
+          });
+        });
+        $("#deactivateStation").on("click", function () {
+          const ids = grabSelectedItemsId();
+          if (!ids.length) {
+            return null;
+          }
+
+          $.ajax({
+            type: "POST",
+            url: host + "/station/deactivate-station",
+            data: {
+              ids,
+            },
+            success: function (data) {
+              dataTable.draw();
+            },
+            error: function (xhr, status, error) {
+              console.log("error");
+            },
+          });
+        });
+        $("#activateStation").on("click", function () {
+          const ids = grabSelectedItemsId();
+          if (!ids.length) {
+            return null;
+          }
+
+          $.ajax({
+            type: "POST",
+            url: host + "/station/activate-station",
+            data: {
+              ids,
+            },
+            success: function (data) {
+              dataTable.draw();
+            },
+            error: function (xhr, status, error) {
+              console.log("error");
+            },
+          });
+        });
+        function grabSelectedItemsId() {
+          const ids = [];
+          const selectedItems = dataTable.rows(".selected").data();
+          for (let i = 0; i < selectedItems.length; i++) {
+            ids.push(selectedItems[i]._id);
+          }
+          return ids;
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
