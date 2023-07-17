@@ -6,6 +6,6 @@ module.exports = {
             error: req.flash('error'),
             success: req.flash('success'),
         };
-        return res.render('calender', data);
+        return res.render('dashboard', data);
     },
 }

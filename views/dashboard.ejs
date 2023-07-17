@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arka</title>
+  </head>
+  <body>
+    <%- include('partitions/navbar') %>
+    <div class="container-fluid">
+      <div class="row flex-nowrap">
+        <%- include('partitions/sidebar') %>
+        <div class="col">
+          <%- include('partitions/notification') %>
+          <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1">
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      New Activity
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">Task</a></li>
+                      <li><a class="dropdown-item" href="#">Fax</a></li>
+                      <li><a class="dropdown-item" href="#">Phone Call</a></li>
+                      <li><a class="dropdown-item" href="#">Email</a></li>
+                      <li><a class="dropdown-item" href="#">Letter</a></li>
+                      <li><a class="dropdown-item" href="#">Appointment</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">Service Activity</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#">Campaign Response</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"
+                          >Recurring Appointment</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      New Record
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      New Record
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#"
+                      >Import Data</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <hr class="mt-0" />
+          <div class="container bg-light overflow-auto h-50">
+            <div class="row">
+              <div class="col">
+                <h3>Iran/Tehran</h3>
+                <span id="date"></span>
+              </div>
+              <div class="col">
+                <h3>China/Beijing</h3>
+                <span id="china-date"></span>
+              </div>
+              <div class="col">
+                <h3>America/New York</h3>
+                <span id="usa-date"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  $(document).ready(function() {
+    setInterval(() => {
+    const newDate = moment();
+    let iranDate = newDate.tz('Asia/Tehran').format("YYYY/MM/DD HH:mm:ss");
+    let chinaDate = newDate.tz('Asia/Shanghai').format("YYYY/MM/DD HH:mm:ss");
+    let usaDate = newDate.tz('America/New_York').format("YYYY/MM/DD HH:mm:ss");
+
+    $('#date').text(iranDate);
+    $('#china-date').text(chinaDate);
+    $('#usa-date').text(usaDate);
+  }, 1000);
+  })
+</script>

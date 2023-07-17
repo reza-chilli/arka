@@ -7,7 +7,7 @@ module.exports = {
     loginController: (req, res) => {
         if (req.session.details) {
             req.flash('error', 'you are already authenticated! please logout to start a new session.');
-            return res.redirect('/dashboard/calender');
+            return res.redirect('/dashboard');
         }
 
         const data = {
@@ -40,7 +40,7 @@ module.exports = {
                 settings: user.settings,
             };
             req.flash('success', `welcome to panel ${user.firstname} ${user.lastname}`);
-            return res.redirect('/dashboard/calender');
+            return res.redirect('/dashboard');
         } catch (error) {
             console.error(`error in loginPostController: ${error}`);
             req.flash('error', 'internal server error!');
