@@ -1,117 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arka</title>
-</head>
-<body>
+  </head>
+  <body>
     <%- include('../partitions/navbar') %>
     <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <%- include('../partitions/sidebar') %>
-            <div class="col">
-                <%- include('../partitions/notification') %>
-                <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1;">
-                    <div class="container-fluid">
-                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <button class="btn" id="saveBtn">Save</button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="btn" id="saveAndCloseBtn">Save & Close</button>
-                            </li>
-                        </ul>
-                      </div>
-                    </div>
-                </nav>
-                <hr class="mt-0">
-                <div class="container border px-5 py-3">
-                    <form>
-                        <div class="row mb-3">
-                            <div class="col-3">
-                                <label for="exampleInputEmail1" class="form-label">Station Code</label>
-                            </div>
-                            <div class="col-9">
-                                <input type="text" class="form-control" value="<%= code ? 'pr-' + code : '' %>" disabled>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-3">
-                                <label for="stationTitle" class="form-label">Station Title</label>
-                            </div>
-                            <div class="col-9">
-                                <input id="stationTitle" type="text" value="<%= title ? title : '' %>" class="form-control" name="stationTitle">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-3">
-                                <label for="productTitle" class="form-label">Product</label>
-                            </div>
-                            <div class="col-9">
-                                <input id="productTitle" type="text" value="<%= title ? title : '' %>" class="form-control" name="productTitle">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <label for="stationNO" class="form-label">Station Number</label>
-                            </div>
-                            <div class="col-9">
-                                <input id="stationNO" type="text" value="<%= title ? title : '' %>" class="form-control" name="stationNO">
-                            </div>
-                        </div>
-                    </form>
-                </div>
+      <div class="row flex-nowrap">
+        <%- include('../partitions/sidebar') %>
+        <div class="col">
+          <%- include('../partitions/notification') %>
+          <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1">
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <button class="btn" id="saveBtn">Save</button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="btn" id="saveAndCloseBtn">
+                      Save & Close
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </nav>
+          <hr class="mt-0" />
+          <div class="container border px-5 py-3">
+            <form autocomplete="off">
+              <div class="row mb-3">
+                <div class="col-3">
+                  <label for="exampleInputEmail1" class="form-label"
+                    >Station Code</label
+                  >
+                </div>
+                <div class="col-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="<%= code ? 'pr-' + code : '' %>"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-3">
+                  <label for="stationTitle" class="form-label"
+                    >Station Title</label
+                  >
+                </div>
+                <div class="col-9">
+                  <input
+                    id="stationTitle"
+                    type="text"
+                    value="<%= title ? title : '' %>"
+                    class="form-control"
+                    name="stationTitle"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-3">
+                  <label for="productTitle" class="form-label">Product</label>
+                </div>
+                <div class="col-9">
+                  <input
+                    id="productTitle"
+                    type="text"
+                    value="<%= title ? title : '' %>"
+                    class="form-control"
+                    name="productTitle"
+                  />
+                  <div id="search-result" class="result-box"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <label for="stationNO" class="form-label"
+                    >Station Number</label
+                  >
+                </div>
+                <div class="col-9">
+                  <input
+                    id="stationNO"
+                    type="text"
+                    value="<%= title ? title : '' %>"
+                    class="form-control"
+                    name="stationNO"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
+    </div>
     <script>
-        const host = window.location.origin;
+      const host = window.location.origin;
 
-        $('#saveBtn').on('click', function() {
-            const title = $('#stationTitle').val();
-            const productTitle = $('#productTitle').val();
-            const stationNO = $('#stationNO').val();
-            const data = {
-                title,
-                productTitle,
-                stationNO,
-            };
-            $.ajax({
-                type: "POST",
-                url: host + '/station/add-product',
-                data,
-                success: function(data) {
-                    window.location.href = host + '/station/add-station/' + data;
-                },
-                error: function(xhr, status, error) {
-                    console.log('error');
-                },
-            });
+      $("#saveBtn").on("click", function () {
+        const title = $("#stationTitle").val();
+        const productTitle = $("#productTitle").val();
+        const stationNO = $("#stationNO").val();
+        const data = {
+          title,
+          productTitle,
+          stationNO,
+        };
+        $.ajax({
+          type: "POST",
+          url: host + "/station/add-product",
+          data,
+          success: function (data) {
+            window.location.href = host + "/station/add-station/" + data;
+          },
+          error: function (xhr, status, error) {
+            console.log("error");
+          },
         });
-        $('#saveAndCloseBtn').on('click', function() {
-            const title = $('#stationTitle').val();
-            const productTitle = $('#productTitle').val();
-            const stationNO = $('#stationNO').val();
-            const data = {
-                title,
-                productTitle,
-                stationNO,
-            };
-            $.ajax({
-                type: "POST",
-                url: host + '/station/add-station',
-                data,
-                success: function(data) {
-                    window.location.href = host + '/station';
-                },
-                error: function(xhr, status, error) {
-                    console.log('error');
-                },
-            });
+      });
+      $("#saveAndCloseBtn").on("click", function () {
+        const title = $("#stationTitle").val();
+        const productTitle = $("#productTitle").val();
+        const stationNO = $("#stationNO").val();
+        const data = {
+          title,
+          productTitle,
+          stationNO,
+        };
+        $.ajax({
+          type: "POST",
+          url: host + "/station/add-station",
+          data,
+          success: function (data) {
+            window.location.href = host + "/station";
+          },
+          error: function (xhr, status, error) {
+            console.log("error");
+          },
         });
+      });
+      $("#productTitle").on("keyup", function () {
+        if (this.value == "") return;
+        $.ajax({
+          type: "POST",
+          url: host + "/product/get-availabe",
+          data: {
+            title: this.value,
+          },
+          success: function (data) {
+            $("#search-result").html(`
+              <ul class="border rounded" 
+                style="text-decoration: none; padding: 0; margin-top: 1px;" 
+                id="available-products">
+              </ul>
+            `);
+            for (let i = 0; i < data.length; i++) {
+              $("#available-products").append(`
+                <li class="px-3 py-2 pickProduct" value="${data[i].title}" style="list-style: none; border-radius: 3px; cursor: pointer;">${data[i].title}</li>
+              `);
+            }
+          },
+          error: function (xhr, status, error) {
+            alert("something went wrong. please contact admin.");
+          },
+        });
+      });
+      $("body").on("click", ".pickProduct", function (e) {
+        $("#search-result").html("");
+        $("#productTitle").val($(this).text());
+      });
     </script>
-</body>
+    <style>
+      .result-box ul li:hover {
+        background: #e9f3ff;
+      }
+    </style>
+  </body>
 </html>
