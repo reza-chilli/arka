@@ -5,6 +5,7 @@ const product = require('./product');
 const project = require('./project');
 const user = require('./user');
 const station = require('./station');
+const listOfActions = require('./list-of-actions');
 
 const authMiddleware = require('../middlewares/auth');
 const authController = require('../controllers/auth');
@@ -26,5 +27,6 @@ router.use('/product', product);
 router.use('/project', project);
 router.use('/user', user);
 router.use('/station', station);
+router.use('/list-of-actions', listOfActions);
 
 module.exports = router;
