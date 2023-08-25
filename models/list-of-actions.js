@@ -22,10 +22,9 @@ const actionsSchema = new Schema(
       ref: "stations",
       required: true,
     },
-    typeOfAction: {
-      type: String,
-      required: true,
-      enum: ["qualitative", "quantitative"],
+    isQualitativeAction: {
+      type: Boolean,
+      default: false,
     },
     minimum: {
       type: Number,
