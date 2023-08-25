@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arka</title>
+  </head>
+  <body>
+    <%- include('../partitions/navbar') %>
+    <div class="container-fluid">
+      <div class="row flex-nowrap">
+        <%- include('../partitions/sidebar') %>
+        <div class="col">
+          <%- include('../partitions/notification') %>
+          <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1">
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <button class="btn" id="saveBtn">Save</button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="btn" id="saveAndCloseBtn">
+                      Save & Close
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <hr class="my-0" />
+          <div class="container-fluid border-bottom px-5 py-5">
+            <div
+              class="border-bottom mb-3 col-lg-8 col-md-10 col-sm-12 mx-auto"
+            >
+              <h3 class="fw-light mb-5">Add Action</h3>
+              <form autocomplete="off">
+                <div class="row mb-3">
+                  <div class="col-3">
+                    <label for="product" class="form-label">Product</label>
+                  </div>
+                  <div class="col-9">
+                    <input
+                      id="product"
+                      type="text"
+                      class="form-control"
+                      name="product"
+                      placeholder="Enter Product Title"
+                      value="<%= actionData ? actionData.productTitle : '' %>"
+                    />
+                    <div class="result-box" id="product-result"></div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">
+                    <label for="station" class="form-label">Station</label>
+                  </div>
+                  <div class="col-9">
+                    <input
+                      id="station"
+                      type="text"
+                      class="form-control"
+                      name="station"
+                      placeholder="Enter Station Title"
+                      value="<%= actionData ? actionData.stationTitle : '' %>"
+                    />
+                    <div class="result-box" id="station-result"></div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">
+                    <label for="stationTitle" class="form-label"
+                      >Action Title</label
+                    >
+                  </div>
+                  <div class="col-9">
+                    <input
+                      id="actionTitle"
+                      type="text"
+                      class="form-control"
+                      name="actionTitle"
+                      placeholder="Enter Action Title"
+                      value="<%= actionData ? actionData.title : '' %>"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-3">
+                    <label for="type" class="form-label"
+                      >Type</label
+                    >
+                  </div>
+                  <div class="col-9">
+                    <select class="form-select" id="type" name="type">
+                      <option selected value="qualitative">Qualitative</option>
+                      <option value="quantitative">Quantitative</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3" id="minimumContainer">
+                  <div class="col-3">
+                    <label class="form-label">Minimum</label>
+                  </div>
+                  <div class="col-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="minimum"
+                      name="minimum"
+                      placeholder="Enter Minimum"
+                      value="<%= actionData ? actionData.minimum : '' %>"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3" id="maximumContainer">
+                  <div class="col-3">
+                    <label class="form-label">Maximum</label>
+                  </div>
+                  <div class="col-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="maximum"
+                      name="maximum"
+                      placeholder="Enter Maximum"
+                      value="<%= actionData ? actionData.maximum : '' %>"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3" id="unitOfMeasurementContainer">
+                  <div class="col-3">
+                    <label class="form-label">Unit Of Measurement</label>
+                  </div>
+                  <div class="col-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="unitOfMeasurement"
+                      name="unitOfMeasurement"
+                      placeholder="Enter Unit of Measurement"
+                      value="<%= actionData ? actionData.unitOfMeasurement : '' %>"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        const host = window.location.origin;
+
+        $("#type").on("change", function () {
+          const type = this.value;
+          if (type === 'quantitative') {
+            $("#minimumContainer").css('display', 'none');
+            $("#maximumContainer").css('display', 'none');
+            $("#unitOfMeasurementContainer").css('display', 'none');
+          } else {
+            $("#minimumContainer").css('display', 'flex');
+            $("#maximumContainer").css('display', 'flex');
+            $("#unitOfMeasurementContainer").css('display', 'flex');
+          }
+        });
+
+        $("#saveBtn").on("click", function () {
+          const fixedSerialNumber = $("#fixedSerialNumber").val();
+          const projectTitle = $("#projectTitle").val();
+          const firstSerialNumber = $("#firstSerialNumber").val();
+          const lastSerialNumber = $("#lastSerialNumber").val();
+          const productTitle = $("#product").val();
+          const data = {
+            fixedSerialNumber,
+            firstSerialNumber,
+            lastSerialNumber,
+            title: projectTitle,
+            productTitle,
+          };
+          $.ajax({
+            type: "POST",
+            url: host + "/list-of-actions/add-action",
+            data,
+            success: function (data) {
+              window.location.href = host + "/list-of-actions/add-action/" + data;
+            },
+            error: function (xhr, status, error) {
+              console.log("error");
+            },
+          });
+        });
+        $("#saveAndCloseBtn").on("click", function () {
+          const fixedSerialNumber = $("#fixedSerialNumber").val();
+          const projectTitle = $("#projectTitle").val();
+          const firstSerialNumber = $("#firstSerialNumber").val();
+          const lastSerialNumber = $("#lastSerialNumber").val();
+          const productTitle = $("#product").val();
+          const data = {
+            fixedSerialNumber,
+            firstSerialNumber,
+            lastSerialNumber,
+            title: projectTitle,
+            productTitle,
+          };
+          $.ajax({
+            type: "POST",
+            url: host + "/list-of-actions/add-action",
+            data,
+            success: function (data) {
+              window.location.href = host + "/list-of-actions";
+            },
+            error: function (xhr, status, error) {
+              console.log("error");
+            },
+          });
+        });
+        $("#product").on("keyup", function () {
+          if (this.value == "") return;
+          $.ajax({
+            type: "POST",
+            url: host + "/product/get-availabe",
+            data: {
+              title: this.value,
+            },
+            success: function (data) {
+              $("#product-result").html(`
+                            <ul class="border rounded" 
+                                style="text-decoration: none; padding: 0; margin-top: 1px;" 
+                                id="available-products">
+                            </ul>
+                        `);
+              for (let i = 0; i < data.length; i++) {
+                $("#available-products").append(`
+                                <li class="px-3 py-2 pickProduct" value="${data[i].title}" style="list-style: none; border-radius: 3px; cursor: pointer;">${data[i].title}</li>
+                            `);
+              }
+            },
+            error: function (xhr, status, error) {
+              alert("something went wrong. please contact admin.");
+            },
+          });
+        });
+        $("#station").on("keyup", function () {
+          if (this.value == "") return;
+          $.ajax({
+            type: "POST",
+            url: host + "/station/get-availabe",
+            data: {
+              title: this.value,
+            },
+            success: function (data) {
+              $("#station-result").html(`
+                            <ul class="border rounded" 
+                                style="text-decoration: none; padding: 0; margin-top: 1px;" 
+                                id="available-stations">
+                            </ul>
+                        `);
+              for (let i = 0; i < data.length; i++) {
+                $("#available-stations").append(`
+                                <li class="px-3 py-2 pickStation" value="${data[i].title}" style="list-style: none; border-radius: 3px; cursor: pointer;">${data[i].title}</li>
+                            `);
+              }
+            },
+            error: function (xhr, status, error) {
+              alert("something went wrong. please contact admin.");
+            },
+          });
+        });
+        $("body").on("click", ".pickStation", function (e) {
+          $("#station-result").html("");
+          $("#station").val($(this).text());
+        });
+        $("body").on("click", ".pickProduct", function (e) {
+          $("#product-result").html("");
+          $("#product").val($(this).text());
+        });
+      });
+    </script>
+    <style>
+      .result-box ul li:hover {
+        background: #e9f3ff;
+      }
+    </style>
+  </body>
+</html>

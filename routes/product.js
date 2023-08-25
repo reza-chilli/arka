@@ -10,7 +10,7 @@ router.post('/add-product', productMiddleware.addProductPostValidate, productCon
 router.post('/delete-product', productMiddleware.deleteProductPostValidate, productController.deleteProductPostData);
 router.post('/deactivate-product', productMiddleware.deactivateProductPostValidate, productController.deactivateProductPostData);
 router.post('/activate-product', productMiddleware.activateProductPostValidate, productController.activateProductPostData);
-router.post('/get-availabe', productController.getAvailableProductPostData)
+router.post('/get-availabe', productController.getAvailableProductPostData);
 
 
 module.exports =router;

@@ -9,18 +9,18 @@ module.exports = {
     return res.render("list-of-actions/list-of-actions", data);
   },
 
-  // async addProjectRender(req, res) {
-  //   try {
-  //     const data = {
-  //       error: req.flash("error"),
-  //       success: req.flash("success"),
-  //       projectData: null,
-  //     };
-  //     return res.render("projects/add", data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // },
+  async addActionRender(req, res) {
+    try {
+      const data = {
+        error: req.flash("error"),
+        success: req.flash("success"),
+        actionData: null,
+      };
+      return res.render("list-of-actions/add", data);
+    } catch (error) {
+      console.error(error);
+    }
+  },
 
   async actionsDataTable(req, res) {
     try {
