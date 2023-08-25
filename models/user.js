@@ -38,6 +38,11 @@ const userSchema = new Schema({
       default: 10,
       enum: [10, 25, 50, 100],
     },
+    language: {
+      type: String,
+      default: 'english',
+      enum: ['english', 'persian'],
+    },
   },
 });
 

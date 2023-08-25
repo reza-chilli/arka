@@ -26,6 +26,7 @@ module.exports = {
   updateSettingsPostValidate: (req, res, next) => {
     const rulesSchema = Joi.object({
       recordPerPage: Joi.string().required().valid("10", "25", "50", "100"),
+      language: Joi.string().allow('english', 'persian'),
     });
 
     const validation = rulesSchema.validate(req.body, {

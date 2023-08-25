@@ -34,6 +34,7 @@ module.exports = {
       }
       const settings = {
         recordPerPage: parseInt(req.body.recordPerPage),
+        language: req.body.language,
       };
       const userUpdate = await userService.findOneAndUpdate(
         { _id: req.session.details.id }, 
@@ -49,7 +50,9 @@ module.exports = {
         });
       });
     } catch (error) {
-      console.error(`Error in updateSettingsPostData: ${error}`);       
+      console.error(`Error in updateSettingsPostData: ${error}`);    
+      req.flash('error', 'Internal Server Error');
+      return res.redirect('/user/settings');   
     }
   },
 };
