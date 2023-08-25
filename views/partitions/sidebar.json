@@ -1,0 +1,42 @@
+{
+  "english": {
+    "home": "Home",
+    "newUser": "New User",
+    "addNewUserModal": {
+      "addNewUser": "Add New User",
+      "firstname": "First Name",
+      "lastname": "Last Name",
+      "username": "Username",
+      "password": "Password",
+      "phoneNumber": "Phone Number",
+      "role": "Role",
+      "saveButton": "Create",
+      "closeButton": "Close"
+    },
+    "profileDropDown": {
+      "settings": "Settings",
+      "profile": "Profile",
+      "logout": "Sign out"
+    }
+  },
+  "persian": {
+    "home": "خانه",
+    "newUser": "کاربر جدید",
+    "addNewUserModal": {
+      "addNewUser": "ایجاد کاربر جدید",
+      "firstname": "نام",
+      "lastname": "نام خانوادگی",
+      "username": "نام کاربری",
+      "password": "رمز عبور",
+      "phoneNumber": "شماره تلفن",
+      "role": "نقش",
+      "saveButton": "ایجاد",
+      "closeButton": "بستن"
+    },
+    "profileDropDown": {
+      "settings": "تنظیمات",
+      "profile": "پروفایل",
+      "logout": "خروج"
+    }
+  }
+}

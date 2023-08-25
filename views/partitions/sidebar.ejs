@@ -22,13 +22,12 @@
         >
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="/user/settings">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><a class="dropdown-item" href="/user/settings"><%= generalContent.sidebar.profileDropDown.settings %></a></li>
+        <li><a class="dropdown-item" href="#"><%= generalContent.sidebar.profileDropDown.profile %></a></li>
         <li>
           <hr class="dropdown-divider" />
         </li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li><a class="dropdown-item" href="#"><%= generalContent.sidebar.profileDropDown.logout %></a></li>
       </ul>
     </div>
     <ul
@@ -38,7 +37,7 @@
       <li class="nav-item">
         <a href="/dashboard" class="nav-link align-middle px-0">
           <i class="fs-4 bi-house"></i>
-          <span class="ms-1 d-none d-sm-inline text-white">Home</span>
+          <span class="ms-1 d-none d-sm-inline text-white"><%= generalContent.sidebar.home %></span>
         </a>
       </li>
       <!-- <li>
@@ -144,7 +143,7 @@
           href="#"
         >
           <i class="fs-4 bi-people"></i>
-          <span class="ms-1 d-none d-sm-inline">New User</span>
+          <span class="ms-1 d-none d-sm-inline"><%= generalContent.sidebar.newUser %></span>
         </a>
       </li>
     </ul>
@@ -162,19 +161,13 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Add New User</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <h5 class="modal-title" id="staticBackdropLabel"><%= generalContent.sidebar.addNewUserModal.addNewUser %></h5>
       </div>
       <div class="modal-body">
         <form>
           <div class="mb-3 row align-items-center">
             <div class="col-3">
-              <label for="firstname" class="form-label">First Name</label>
+              <label for="firstname" class="form-label"><%= generalContent.sidebar.addNewUserModal.firstname %></label>
             </div>
             <div class="col-9">
               <input
@@ -188,7 +181,7 @@
           </div>
           <div class="mb-3 row align-items-center">
             <div class="col-3">
-              <label for="lastname" class="form-label">Last Name</label>
+              <label for="lastname" class="form-label"><%= generalContent.sidebar.addNewUserModal.lastname %></label>
             </div>
             <div class="col-9">
               <input
@@ -202,7 +195,7 @@
           </div>
           <div class="mb-3 row align-items-center">
             <div class="col-3">
-              <label for="username" class="form-label">Username</label>
+              <label for="username" class="form-label"><%= generalContent.sidebar.addNewUserModal.username %></label>
             </div>
             <div class="col-9">
               <input
@@ -216,7 +209,7 @@
           </div>
           <div class="mb-3 row align-items-center">
             <div class="col-3">
-              <label for="password" class="form-label">Password</label>
+              <label for="password" class="form-label"><%= generalContent.sidebar.addNewUserModal.password %></label>
             </div>
             <div class="col-9">
               <input
@@ -230,7 +223,7 @@
           </div>
           <div class="mb-3 row align-items-center">
             <div class="col-3">
-              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <label for="phoneNumber" class="form-label"><%= generalContent.sidebar.addNewUserModal.phoneNumber %></label>
             </div>
             <div class="col-9">
               <input
@@ -244,7 +237,7 @@
           </div>
           <div class="mb-3 row align-items-center">
             <div class="col-3">
-              <label for="role" class="form-label">Role</label>
+              <label for="role" class="form-label"><%= generalContent.sidebar.addNewUserModal.role %></label>
             </div>
             <div class="col-9">
               <select name="role" id="role" class="form-select">
@@ -256,10 +249,10 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
+          <%= generalContent.sidebar.addNewUserModal.closeButton %>
         </button>
         <button type="button" class="btn btn-primary" id="saveUserBtn">
-          Create
+          <%= generalContent.sidebar.addNewUserModal.saveButton %>
         </button>
       </div>
     </div>
