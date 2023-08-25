@@ -8,7 +8,7 @@ router.get('/add-station', stationController.addStationRender);
 router.post('/add-station', stationMiddleware.addStationPostValidate, stationController.addStationPostData);
 router.post('/get-availabe', stationController.getAvailableStationPostData);
 // router.post('/delete-project', projectMiddleware.deleteProjectPostValidate, projectController.deleteProjectPostData);
-// router.post('/deactivate-project', projectMiddleware.deactivateProjectPostValidate, projectController.deactivateProjectPostData);
-// router.post('/activate-project', projectMiddleware.activateProjectPostValidate, projectController.activateProjectPostData);
+router.post('/deactivate-station', stationMiddleware.deactivateStationPostValidate, stationController.deactivateProductPostData);
+router.post('/activate-station', stationMiddleware.activateStationPostValidate, stationController.activateProductPostData);
 
-module.exports =router;
+module.exports = router;

@@ -69,32 +69,32 @@ module.exports = {
   //         console.error(`Error in deleteProductPostData: ${error}`);
   //     }
   // },
-  // async deactivateProductPostData(req, res) {
-  //     try {
-  //         const body = req.body;
-  //         const data = {
-  //             _id: { $in: body.ids },
-  //         };
-  //         const query = { active: false };
-  //         const deactiveProducts = await productService.updateMany(data, query);
-  //         res.status(200).send();
-  //     } catch (error) {
-  //         console.error(`Error in deactivateProductPostData: ${error}`);
-  //     }
-  // },
-  // async activateProductPostData(req, res) {
-  //     try {
-  //         const body = req.body;
-  //         const data = {
-  //             _id: { $in: body.ids },
-  //         };
-  //         const query = { active: true };
-  //         const deactiveProducts = await productService.updateMany(data, query);
-  //         res.status(200).send();
-  //     } catch (error) {
-  //         console.error(`Error in activateProductPostData: ${error}`);
-  //     }
-  // },
+  async deactivateProductPostData(req, res) {
+    try {
+      const body = req.body;
+      const data = {
+        _id: { $in: body.ids },
+      };
+      const query = { active: false };
+      const deactiveStations = await stationService.updateMany(data, query);
+      res.status(200).send();
+    } catch (error) {
+      console.error(`Error in deactivateProductPostData: ${error}`);
+    }
+  },
+  async activateProductPostData(req, res) {
+    try {
+      const body = req.body;
+      const data = {
+        _id: { $in: body.ids },
+      };
+      const query = { active: true };
+      const deactiveStations = await stationService.updateMany(data, query);
+      res.status(200).send();
+    } catch (error) {
+      console.error(`Error in activateProductPostData: ${error}`);
+    }
+  },
   async stationDataTable(req, res) {
     try {
       const start = parseInt(req.body.start);
