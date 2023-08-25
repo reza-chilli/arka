@@ -1,5 +1,4 @@
-const projectService = require("../services/project");
-const productService = require("../services/product");
+const actionsService = require("../services/list-of-actions");
 
 module.exports = {
   async actionsDataTableRender(req, res) {
@@ -23,41 +22,41 @@ module.exports = {
   //   }
   // },
 
-  // async projectDataTable(req, res) {
-  //   try {
-  //     const start = parseInt(req.body.start);
-  //     const length = parseInt(req.body.length);
-  //     const search = req.body.search.value;
-  //     const sanitizedSearch = escape(search);
-  //     const query = {};
+  async actionsDataTable(req, res) {
+    try {
+      const start = parseInt(req.body.start);
+      const length = parseInt(req.body.length);
+      const search = req.body.search.value;
+      const sanitizedSearch = escape(search);
+      const query = {};
 
-  //     if (search !== "") {
-  //       query.title = { $regex: `.*${sanitizedSearch}.*` };
-  //     }
-  //     if (req.body.status == "active") {
-  //       query.active = true;
-  //     } else if (req.body.status == "deactive") {
-  //       query.active = false;
-  //     }
+      if (search !== "") {
+        query.title = { $regex: `.*${sanitizedSearch}.*` };
+      }
+      if (req.body.status == "active") {
+        query.active = true;
+      } else if (req.body.status == "deactive") {
+        query.active = false;
+      }
 
-  //     const projectCount = await projectService.countDocuments({});
-  //     const filteredProjectCount = await projectService.countDocuments(query);
+      const actionsCount = await actionsService.countDocuments({});
+      const filteredActionsCount = await actionsService.countDocuments(query);
 
-  //     const projects = await projectService.find(query, null, {
-  //       skip: start,
-  //       limit: length,
-  //     });
-  //     const obj = {
-  //       draw: req.query.draw,
-  //       recordsTotal: projectCount,
-  //       recordsFiltered: filteredProjectCount,
-  //       data: projects,
-  //     };
-  //     res.status(200).send(obj);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // },
+      const actions = await actionsService.find(query, null, {
+        skip: start,
+        limit: length,
+      });
+      const obj = {
+        draw: req.query.draw,
+        recordsTotal: actionsCount,
+        recordsFiltered: filteredActionsCount,
+        data: actions,
+      };
+      res.status(200).send(obj);
+    } catch (error) {
+      console.error(error);
+    }
+  },
   // async addProjectPostData(req, res) {
   //   try {
   //     const data = req.body;

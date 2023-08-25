@@ -62,6 +62,8 @@
                   <th>Station</th>
                   <th>Action Title</th>
                   <th>Type</th>
+                  <th>Status</th>
+                  <th>Created On</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -87,7 +89,7 @@
             style: "multi",
           },
           ajax: {
-            url: host + "/list-of-action/datatable",
+            url: host + "/list-of-actions/datatable",
             type: "POST",
             data: function (d) {
               d.status = $("#status").find(":selected").val();
@@ -100,9 +102,27 @@
               },
             },
             {
+              data: "product.title",
+              render: function (data, type, row) {
+                return `<a class="link-dark" href="/product/add-product/${row.product._id}">${row.product.title}</a>`;
+              },
+            },
+            {
+              data: "station.title",
+              render: function (data, type, row) {
+                return `<a class="link-dark" href="/station/add-station/${row.station._id}">${row.station.title}</a>`;
+              },
+            },
+            {
               data: "title",
               render: function (data, type, row) {
                 return `<a class="link-dark" href="/product/add-product/${row._id}">${row.title}</a>`;
+              },
+            },
+            {
+              data: "type",
+              render: function (data, type, row) {
+                return data;
               },
             },
             {
