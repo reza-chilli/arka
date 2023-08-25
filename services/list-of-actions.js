@@ -57,14 +57,14 @@ module.exports = {
   //         return new Error('something went wrong');
   //     }
   // },
-  // async updateMany(data, query, option) {
-  //     try {
-  //         return await actionsModel.updateMany(data, query, option);
-  //     } catch (error) {
-  //         console.error(`Error in project updateMany: ${error}`);
-  //         return new Error('something went wrong');
-  //     }
-  // },
+  async updateMany(data, query, option) {
+    try {
+      return await actionsModel.updateMany(data, query, option);
+    } catch (error) {
+      console.error(`Error in action updateMany: ${error}`);
+      return new Error("something went wrong");
+    }
+  },
   // async findOne(query, select, option) {
   //     try {
   //         return await actionsModel.findOne(query, select, option).populate('product');

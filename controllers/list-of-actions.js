@@ -105,32 +105,32 @@ module.exports = {
   //     console.error(`Error in deleteProductPostData: ${error}`);
   //   }
   // },
-  // async deactivateProjectPostData(req, res) {
-  //   try {
-  //     const body = req.body;
-  //     const data = {
-  //       _id: { $in: body.ids },
-  //     };
-  //     const query = { active: false };
-  //     const deactiveProjects = await projectService.updateMany(data, query);
-  //     res.status(200).send();
-  //   } catch (error) {
-  //     console.error(`Error in deactivateProductPostData: ${error}`);
-  //   }
-  // },
-  // async activateProjectPostData(req, res) {
-  //   try {
-  //     const body = req.body;
-  //     const data = {
-  //       _id: { $in: body.ids },
-  //     };
-  //     const query = { active: true };
-  //     const deactiveProjects = await projectService.updateMany(data, query);
-  //     res.status(200).send();
-  //   } catch (error) {
-  //     console.error(`Error in activateProductPostData: ${error}`);
-  //   }
-  // },
+  async deactivateActionPostData(req, res) {
+    try {
+      const body = req.body;
+      const data = {
+        _id: { $in: body.ids },
+      };
+      const query = { active: false };
+      const deactiveActions = await actionsService.updateMany(data, query);
+      res.status(200).send();
+    } catch (error) {
+      console.error(`Error in deactivateProductPostData: ${error}`);
+    }
+  },
+  async activateActionPostData(req, res) {
+    try {
+      const body = req.body;
+      const data = {
+        _id: { $in: body.ids },
+      };
+      const query = { active: true };
+      const deactiveActions = await actionsService.updateMany(data, query);
+      res.status(200).send();
+    } catch (error) {
+      console.error(`Error in activateProductPostData: ${error}`);
+    }
+  },
   // async projectRender(req, res) {
   //   try {
   //     const { projectId } = req.params;

@@ -8,8 +8,8 @@ router.get('/add-action', listOfActionsController.addActionRender);
 router.post('/add-action', listOfActionsMiddleware.addActionPostValidate, listOfActionsController.addActionPostData);
 // router.get('/add-project/:projectId', projectController.projectRender);
 // router.post('/delete-project', projectMiddleware.deleteProjectPostValidate, projectController.deleteProjectPostData);
-// router.post('/deactivate-project', projectMiddleware.deactivateProjectPostValidate, projectController.deactivateProjectPostData);
-// router.post('/activate-project', projectMiddleware.activateProjectPostValidate, projectController.activateProjectPostData);
+router.post('/deactivate-action', listOfActionsMiddleware.deactivateActionPostValidate, listOfActionsController.deactivateActionPostData);
+router.post('/activate-action', listOfActionsMiddleware.activateActionPostValidate, listOfActionsController.activateActionPostData);
 
 
 module.exports =router;
