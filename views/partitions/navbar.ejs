@@ -10,7 +10,7 @@
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Reports
+              <%= generalContent.navbar.reports %>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
@@ -29,17 +29,17 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Data Entry
+              <%= generalContent.navbar.dataEntry %>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/product">Products</a></li>
-              <li><a class="dropdown-item" href="/project">Projects</a></li>
-              <li><a class="dropdown-item" href="/station">Stations</a></li>
-              <li><a class="dropdown-item" href="/list-of-actions">List of Actions</a></li>
+              <li><a class="dropdown-item" href="/product"><%= generalContent.navbar.dataEntryChilds.products %></a></li>
+              <li><a class="dropdown-item" href="/project"><%= generalContent.navbar.dataEntryChilds.projects %></a></li>
+              <li><a class="dropdown-item" href="/station"><%= generalContent.navbar.dataEntryChilds.stations %></a></li>
+              <li><a class="dropdown-item" href="/list-of-actions"><%= generalContent.navbar.dataEntryChilds.listOfActions %></a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Calender</a>
+            <a class="nav-link" aria-current="page" href="#"><%= generalContent.navbar.calender %></a>
           </li>
         </ul>
       </div>

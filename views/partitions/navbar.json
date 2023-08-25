@@ -1,8 +1,26 @@
 {
   "english": {
-    "title": "Arka Software System"
+    "title": "Arka Software System",
+    "reports": "Reports",
+    "dataEntry": "Data Entry",
+    "calender": "Calender",
+    "dataEntryChilds": {
+      "products": "Products",
+      "projects": "Projects",
+      "stations": "Stations",
+      "listOfActions": "List of Actions"
+    }
   },
   "persian": {
-    "title": "سیستم نرم افزاری آرکا"
+    "title": "سیستم نرم افزاری آرکا",
+    "reports": "گزارش ها",
+    "dataEntry": "ورود اطلاعات",
+    "calender": "تقویم",
+    "dataEntryChilds": {
+      "products": "محصولات",
+      "projects": "پروژه ها",
+      "stations": "ایستگاه ها",
+      "listOfActions": "فهرست اقدامات"
+    }
   }
 }
