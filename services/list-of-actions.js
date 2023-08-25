@@ -3,7 +3,10 @@ const actionsModel = require("../models/list-of-actions");
 module.exports = {
   async find(query, select, option) {
     try {
-      return await actionsModel.find(query, select, option).populate("product");
+      return await actionsModel
+        .find(query, select, option)
+        .populate("product")
+        .populate("station");
     } catch (error) {
       console.error(`Error in product find: ${error}`);
       return new Error("something went wrong");
@@ -19,21 +22,19 @@ module.exports = {
     }
   },
 
-  // async create(data) {
-  //     try {
-  //         data.code = await this.getLastProjectCode() + 1;
-
-  //         const newProject = await actionsModel.create(data);
-  //         if (newProject && !(newProject instanceof Error)) {
-  //             return newProject;
-  //         } else {
-  //             return new Error('something went wrong');
-  //         }
-  //     } catch (error) {
-  //         console.error(`Error in project create: ${error}`);
-  //         return new Error('something went wrong');
-  //     }
-  // },
+  async create(data) {
+    try {
+      const newAction = await actionsModel.create(data);
+      if (newAction && !(newAction instanceof Error)) {
+        return newAction;
+      } else {
+        return new Error("something went wrong");
+      }
+    } catch (error) {
+      console.error(`Error in project create: ${error}`);
+      return new Error("something went wrong");
+    }
+  },
 
   // async getLastProjectCode() {
   //     try {

@@ -58,9 +58,9 @@
                 </div>
                 <tr>
                   <th></th>
+                  <th>Action Title</th>
                   <th>Product</th>
                   <th>Station</th>
-                  <th>Action Title</th>
                   <th>Type</th>
                   <th>Status</th>
                   <th>Created On</th>
@@ -102,6 +102,12 @@
               },
             },
             {
+              data: "title",
+              render: function (data, type, row) {
+                return `<a class="link-dark" href="/product/add-product/${row._id}">${row.title}</a>`;
+              },
+            },
+            {
               data: "product.title",
               render: function (data, type, row) {
                 return `<a class="link-dark" href="/product/add-product/${row.product._id}">${row.product.title}</a>`;
@@ -114,15 +120,13 @@
               },
             },
             {
-              data: "title",
-              render: function (data, type, row) {
-                return `<a class="link-dark" href="/product/add-product/${row._id}">${row.title}</a>`;
-              },
-            },
-            {
               data: "type",
               render: function (data, type, row) {
-                return data;
+                if (row.isQualitativeAction) {
+                  return 'Qualitative';
+                } else {
+                  return 'Quantitative';
+                }
               },
             },
             {

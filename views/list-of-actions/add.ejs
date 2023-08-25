@@ -70,7 +70,7 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col-3">
-                    <label for="stationTitle" class="form-label"
+                    <label for="actionTitle" class="form-label"
                       >Action Title</label
                     >
                   </div>
@@ -93,8 +93,8 @@
                   </div>
                   <div class="col-9">
                     <select class="form-select" id="type" name="type">
-                      <option selected value="qualitative">Qualitative</option>
-                      <option value="quantitative">Quantitative</option>
+                      <option selected value="quantitative">Quantitative</option>
+                      <option value="qualitative">Qualitative</option>
                     </select>
                   </div>
                 </div>
@@ -155,10 +155,12 @@
 
         $("#type").on("change", function () {
           const type = this.value;
-          if (type === 'quantitative') {
+          if (type === 'qualitative') {
             $("#minimumContainer").css('display', 'none');
             $("#maximumContainer").css('display', 'none');
             $("#unitOfMeasurementContainer").css('display', 'none');
+            $("#minimum").val("");
+            $("#maximum").val("");
           } else {
             $("#minimumContainer").css('display', 'flex');
             $("#maximumContainer").css('display', 'flex');
@@ -167,17 +169,21 @@
         });
 
         $("#saveBtn").on("click", function () {
-          const fixedSerialNumber = $("#fixedSerialNumber").val();
-          const projectTitle = $("#projectTitle").val();
-          const firstSerialNumber = $("#firstSerialNumber").val();
-          const lastSerialNumber = $("#lastSerialNumber").val();
+          const title = $("#actionTitle").val();
           const productTitle = $("#product").val();
+          const stationTitle = $("#station").val();
+          const type = $("#type").val();
+          const minimum = $("#minimum").val();
+          const maximum = $("#maximum").val();
+          const unitOfMeasurement = $("#unitOfMeasurement").val();
           const data = {
-            fixedSerialNumber,
-            firstSerialNumber,
-            lastSerialNumber,
-            title: projectTitle,
             productTitle,
+            stationTitle,
+            type,
+            minimum,
+            maximum,
+            unitOfMeasurement,
+            title,
           };
           $.ajax({
             type: "POST",
@@ -192,17 +198,21 @@
           });
         });
         $("#saveAndCloseBtn").on("click", function () {
-          const fixedSerialNumber = $("#fixedSerialNumber").val();
-          const projectTitle = $("#projectTitle").val();
-          const firstSerialNumber = $("#firstSerialNumber").val();
-          const lastSerialNumber = $("#lastSerialNumber").val();
+          const title = $("#actionTitle").val();
           const productTitle = $("#product").val();
+          const stationTitle = $("#station").val();
+          const type = $("#type").val();
+          const minimum = $("#minimum").val();
+          const maximum = $("#maximum").val();
+          const unitOfMeasurement = $("#unitOfMeasurement").val();
           const data = {
-            fixedSerialNumber,
-            firstSerialNumber,
-            lastSerialNumber,
-            title: projectTitle,
+            title,
             productTitle,
+            stationTitle,
+            type,
+            minimum,
+            maximum,
+            unitOfMeasurement,
           };
           $.ajax({
             type: "POST",

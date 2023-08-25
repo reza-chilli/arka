@@ -1,4 +1,6 @@
 const actionsService = require("../services/list-of-actions");
+const stationService = require("../services/station");
+const productService = require("../services/product");
 
 module.exports = {
   async actionsDataTableRender(req, res) {
@@ -57,29 +59,40 @@ module.exports = {
       console.error(error);
     }
   },
-  // async addProjectPostData(req, res) {
-  //   try {
-  //     const data = req.body;
-  //     const product = await productService.findOne({
-  //       title: data.productTitle,
-  //     });
-  //     if (!product) {
-  //       req.flash("error", "product not fount!");
-  //       return res.redirect("/project/add-project");
-  //     }
-  //     data.product = product._id;
-  //     data.productCount = parseInt(
-  //       data.lastSerialNumber - data.firstSerialNumber + 1
-  //     );
-  //     const newProject = await projectService.create(data);
+  async addActionPostData(req, res) {
+    try {
+      const data = req.body;
+      const product = await productService.findOne({
+        title: data.productTitle,
+      });
+      const station = await stationService.findOne({
+        title: data.stationTitle,
+      });
+      if (!product) {
+        req.flash("error", "product not fount!");
+        return res.redirect("/list-of-actions/add-action");
+      }
+      if (!station) {
+        req.flash("error", "station not fount!");
+        return res.redirect("/list-of-actions/add-action");
+      }
+      data.product = product._id;
+      data.station = station._id;
+      data.isQualitativeAction = data.type === 'qualitative';
+      if (data.isQualitativeAction) {
+        data.minimum = "";
+        data.maximum = "";
+        data.unitOfMeasurement = "";
+      }
+      const newAction = await actionsService.create(data);
 
-  //     res.status(200).send(String(newProject._id));
-  //   } catch (error) {
-  //     console.error(`Error in addProductPostData: ${error}`);
-  //     req.flash("error", "internal server error.");
-  //     return res.redirect("/project/add-project");
-  //   }
-  // },
+      res.status(200).send(String(newAction._id));
+    } catch (error) {
+      console.error(`Error in addProductPostData: ${error}`);
+      req.flash("error", "internal server error.");
+      return res.redirect("/project/add-project");
+    }
+  },
   // async deleteProjectPostData(req, res) {
   //   try {
   //     const data = req.body;
