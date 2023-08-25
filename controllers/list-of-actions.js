@@ -1,21 +1,30 @@
 const actionsService = require("../services/list-of-actions");
 const stationService = require("../services/station");
 const productService = require("../services/product");
+const helpers = require('../helpers');
+const userService = require('../services/user');
 
 module.exports = {
   async actionsDataTableRender(req, res) {
+    const user = await userService.findOne({ _id: req.session.details.id });
+    const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
+
     const data = {
       error: req.flash("error"),
       success: req.flash("success"),
+      generalContent,
     };
     return res.render("list-of-actions/list-of-actions", data);
   },
 
   async addActionRender(req, res) {
+    const user = await userService.findOne({ _id: req.session.details.id });
+    const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
     try {
       const data = {
         error: req.flash("error"),
         success: req.flash("success"),
+        generalContent,
         actionData: null,
       };
       return res.render("list-of-actions/add", data);

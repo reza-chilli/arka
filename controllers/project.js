@@ -1,20 +1,28 @@
 const projectService = require('../services/project');
 const productService = require('../services/product');
+const helpers = require('../helpers');
+const userService = require('../services/user');
 
 module.exports = {
-    projectDataTableRender: (req, res) => {
+    async projectDataTableRender(req, res) {
+        const user = await userService.findOne({ _id: req.session.details.id });
+        const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
         const data = {
             error: req.flash('error'),
             success: req.flash('success'),
+            generalContent,
         };
         return res.render('projects/project', data);
     },
 
     async addProjectRender(req, res) {
         try {
+            const user = await userService.findOne({ _id: req.session.details.id });
+            const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
             const data = {
                 error: req.flash('error'),
                 success: req.flash('success'),
+                generalContent,
                 projectData: null,
             };
             return res.render('projects/add', data);
@@ -114,6 +122,8 @@ module.exports = {
     },
     async projectRender(req, res) {
         try {
+            const user = await userService.findOne({ _id: req.session.details.id });
+            const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
             const { projectId } = req.params;
             let { title, code, productCount, firstSerialNumber, lastSerialNumber, fixedSerialNumber, product } = await projectService.findOne({ _id: projectId });
             code = code.toString();
@@ -135,6 +145,7 @@ module.exports = {
             const data = {
                 error: req.flash('error'),
                 success: req.flash('success'),
+                generalContent,
                 projectData,
             };
             res.render('projects/add', data);

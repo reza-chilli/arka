@@ -1,18 +1,26 @@
 const stationService = require("../services/station");
 const productService = require("../services/product");
+const helpers = require('../helpers');
+const userService = require('../services/user');
 
 module.exports = {
-  stationDataTableRender: function (req, res) {
+  async stationDataTableRender (req, res) {
+    const user = await userService.findOne({ _id: req.session.details.id });
+    const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
     const data = {
       error: req.flash("error"),
       success: req.flash("success"),
+      generalContent,
     };
     return res.render("stations/station", data);
   },
-  addStationRender: function (req, res) {
+  async addStationRender (req, res) {
+    const user = await userService.findOne({ _id: req.session.details.id });
+    const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
     const data = {
       error: req.flash("error"),
       success: req.flash("success"),
+      generalContent,
       code: null,
       title: null,
     };

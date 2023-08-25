@@ -1,4 +1,5 @@
 const userService = require("../services/user");
+const helpers = require('../helpers');
 
 module.exports = {
   async addUserPostData(req, res) {
@@ -16,11 +17,16 @@ module.exports = {
   },
   async settingRender(req, res) {
     try {
-    const data = {
-      error: req.flash('error'),
-      success: req.flash('success'),
-    };
-      res.render('user/settings', data);
+      const user = await userService.findOne({ _id: req.session.details.id });
+      const generalContent = await helpers.grabGeneralContentFromLanguage(
+        user.settings.language || "english"
+      );
+      const data = {
+        error: req.flash("error"),
+        success: req.flash("success"),
+        generalContent,
+      };
+      res.render("user/settings", data);
     } catch (error) {
       console.error(`Error in addUserPostData: ${error}`);
     }
@@ -29,30 +35,30 @@ module.exports = {
     try {
       const user = await userService.findOne({ _id: req.session.details.id });
       if (!user) {
-        req.flash('error', 'user not found.');
-        return res.redirect('/user/settings');
+        req.flash("error", "user not found.");
+        return res.redirect("/user/settings");
       }
       const settings = {
         recordPerPage: parseInt(req.body.recordPerPage),
         language: req.body.language,
       };
       const userUpdate = await userService.findOneAndUpdate(
-        { _id: req.session.details.id }, 
-        { $set: { settings } }, 
+        { _id: req.session.details.id },
+        { $set: { settings } },
         { new: true }
       );
 
       req.session.details.settings = userUpdate.settings;
       req.session.save((err) => {
         req.session.reload((err) => {
-          req.flash('success', 'settings updated successfully');
-          return res.redirect('/user/settings');
+          req.flash("success", "settings updated successfully");
+          return res.redirect("/user/settings");
         });
       });
     } catch (error) {
-      console.error(`Error in updateSettingsPostData: ${error}`);    
-      req.flash('error', 'Internal Server Error');
-      return res.redirect('/user/settings');   
+      console.error(`Error in updateSettingsPostData: ${error}`);
+      req.flash("error", "Internal Server Error");
+      return res.redirect("/user/settings");
     }
   },
 };

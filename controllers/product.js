@@ -1,17 +1,27 @@
 const productService = require("../services/product");
+const helpers = require('../helpers');
+const userService = require('../services/user');
 
 module.exports = {
-  productDataTableRender: (req, res) => {
+  async productDataTableRender(req, res) {
+    const user = await userService.findOne({ _id: req.session.details.id });
+    const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
+
     const data = {
       error: req.flash("error"),
       success: req.flash("success"),
+      generalContent,
     };
     return res.render("products/product", data);
   },
-  addProductRender: (req, res) => {
+  async addProductRender(req, res) {
+    const user = await userService.findOne({ _id: req.session.details.id });
+    const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
+
     const data = {
       error: req.flash("error"),
       success: req.flash("success"),
+      generalContent,
       code: null,
       title: null,
     };
@@ -29,6 +39,9 @@ module.exports = {
   },
   async productRender(req, res) {
     try {
+      const user = await userService.findOne({ _id: req.session.details.id });
+      const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
+
       const { productId } = req.params;
       let { title, code } = await productService.findOne({ _id: productId });
       code = code.toString();
@@ -41,6 +54,7 @@ module.exports = {
       const data = {
         error: req.flash("error"),
         success: req.flash("success"),
+        generalContent,
         title,
         code,
       };
