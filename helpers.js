@@ -12,4 +12,7 @@ module.exports = {
     generalContent.sidebar = sidebar[lang];
     return generalContent;
   },
+  async productDatatableContent(lang) {
+    
+  }
 };

@@ -1,16 +1,20 @@
 const productService = require("../services/product");
 const helpers = require('../helpers');
 const userService = require('../services/user');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
   async productDataTableRender(req, res) {
     const user = await userService.findOne({ _id: req.session.details.id });
     const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
-
+    const rawData = fs.readFileSync(path.join(__dirname, '../views/products/product.json'));
+    const productDataTableContent = JSON.parse(rawData);
     const data = {
       error: req.flash("error"),
       success: req.flash("success"),
       generalContent,
+      content: productDataTableContent[user.settings.language || 'english'],
     };
     return res.render("products/product", data);
   },

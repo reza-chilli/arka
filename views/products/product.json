@@ -1,0 +1,30 @@
+{
+  "english": {
+    "products": "Products",
+    "statusFilter": {
+      "all": "All",
+      "active": "Active",
+      "deactive": "Deactive"
+    },
+    "datatable": {
+      "productTitle": "Product Title",
+      "status": "Status",
+      "createdAt": "Created At",
+      "searchBox": "Search Product"
+    }
+  },
+  "persian": {
+    "products": "محصولات",
+    "statusFilter": {
+      "all": "همه",
+      "active": "فعال",
+      "deactive": "غیر فعال"
+    },
+    "datatable": {
+      "productTitle": "عنوان محصول",
+      "status": "وضعیت",
+      "createdAt": "تاریخ ساخت",
+      "searchBox": "جستوجوی محصول"
+    }
+  }
+}

@@ -16,7 +16,7 @@
           <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1">
             <div class="container-fluid">
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mb-2 mb-lg-0">
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/product/add-product">New</a>
                   </li>
@@ -47,20 +47,20 @@
             >
               <thead>
                 <div class="mb-3 container d-flex px-0 justify-content-between">
-                  <h2 class="fw-light">Products</h2>
+                  <h2 class="fw-light"><%= content.products %></h2>
                   <div class="col-2">
                     <select class="form-select" id="status">
-                      <option value="all">All</option>
-                      <option selected value="active">Active</option>
-                      <option value="deactive">Deactive</option>
+                      <option value="all"><%= content.statusFilter.all %></option>
+                      <option selected value="active"><%= content.statusFilter.active %></option>
+                      <option value="deactive"><%= content.statusFilter.deactive %></option>
                     </select>
                   </div>
                 </div>
                 <tr>
                   <th></th>
-                  <th>Product Title</th>
-                  <th>Status</th>
-                  <th>Created On</th>
+                  <th><%= content.datatable.productTitle %></th>
+                  <th><%= content.datatable.status %></th>
+                  <th><%= content.datatable.createdAt %></th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -75,7 +75,7 @@
         const host = window.location.origin;
         const dataTable = $("#myTable").DataTable({
           oLanguage: {
-            sSearch: "Search Product",
+            sSearch: "<%= content.datatable.searchBox %>",
           },
           processing: true,
           serverSide: true,
@@ -108,9 +108,9 @@
               data: "active",
               render: function (data, type, row) {
                 if (row.active) {
-                  return "Active";
+                  return "<%= content.statusFilter.active %>";
                 }
-                return "Deactive";
+                return "<%= content.statusFilter.deactive %>";
               },
             },
             {
@@ -200,5 +200,15 @@
         }
       });
     </script>
+    <% if (settings.language === 'persian') { %>
+    <style>
+      .dataTables_filter {
+        text-align: left !important;
+      }
+      th {
+        text-align: right !important;
+      }
+    </style>
+    <% } %>
   </body>
 </html>
