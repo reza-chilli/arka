@@ -21,13 +21,14 @@ module.exports = {
   async addProductRender(req, res) {
     const user = await userService.findOne({ _id: req.session.details.id });
     const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
-
+    const rawData = fs.readFileSync(path.join(__dirname, '../views/products/add.json'));
+    const addProductContent = JSON.parse(rawData);
     const data = {
       error: req.flash("error"),
       success: req.flash("success"),
       generalContent,
-      code: null,
-      title: null,
+      content: addProductContent[user.settings.language || 'english'],
+      product: null,
     };
     return res.render("products/add", data);
   },
@@ -45,7 +46,8 @@ module.exports = {
     try {
       const user = await userService.findOne({ _id: req.session.details.id });
       const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
-
+      const rawData = fs.readFileSync(path.join(__dirname, '../views/products/add.json'));
+      const editProductContent = JSON.parse(rawData);
       const { productId } = req.params;
       let { title, code } = await productService.findOne({ _id: productId });
       code = code.toString();
@@ -59,8 +61,11 @@ module.exports = {
         error: req.flash("error"),
         success: req.flash("success"),
         generalContent,
-        title,
-        code,
+        content: editProductContent[user.settings.language || 'english'],
+        product: {
+          title,
+          code,
+        },
       };
       res.render("products/add", data);
     } catch (error) {

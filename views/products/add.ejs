@@ -1,93 +1,122 @@
 <!DOCTYPE html>
-<html lang="<%= settings.language === 'persian' ? 'fa' : 'en' %>" dir="<%= settings.language === 'persian' ? 'rtl' : 'ltr' %>">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html
+  lang="<%= settings.language === 'persian' ? 'fa' : 'en' %>"
+  dir="<%= settings.language === 'persian' ? 'rtl' : 'ltr' %>"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arka</title>
-</head>
-<body>
+  </head>
+  <body>
     <%- include('../partitions/navbar') %>
     <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <%- include('../partitions/sidebar') %>
-            <div class="col">
-                <%- include('../partitions/notification') %>
-                <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1;">
-                    <div class="container-fluid">
-                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <button class="btn" id="saveBtn">Save</button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="btn" id="saveAndCloseBtn">Save & Close</button>
-                            </li>
-                        </ul>
-                      </div>
-                    </div>
-                </nav>
-                <hr class="mt-0">
-                <div class="container border px-5 py-3">
-                    <form>
-                        <div class="row mb-3">
-                            <div class="col-3">
-                                <label for="exampleInputEmail1" class="form-label">Product Code</label>
-                            </div>
-                            <div class="col-9">
-                                <input type="text" class="form-control" value="<%= code ? 'pr-' + code : '' %>" disabled>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <label for="exampleInputEmail1" class="form-label">Product Title</label>
-                            </div>
-                            <div class="col-9">
-                                <input id="productTitle" type="text" value="<%= title ? title : '' %>" class="form-control" name="productTitle">
-                            </div>
-                        </div>
-                    </form>
-                </div>
+      <div class="row flex-nowrap">
+        <%- include('../partitions/sidebar') %>
+        <div class="col">
+          <%- include('../partitions/notification') %>
+          <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1">
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <button class="btn" id="saveBtn">
+                      <%= content.save %>
+                    </button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="btn" id="saveAndCloseBtn">
+                      <%= content.saveAndClose %>
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </nav>
+          <hr class="mt-0" />
+          <h2 class="fw-light mb-3">
+            <% if (product) { %>
+                <%= content.editTitle %>
+            <% } else { %>
+                <%= content.addTitle %>
+            <% } %>
+          </h2>
+          <div class="container px-5 py-3">
+            <form>
+              <div class="row mb-3">
+                <div class="col-3">
+                  <label for="exampleInputEmail1" class="form-label"
+                    ><%= content.form.productCode %></label
+                  >
+                </div>
+                <div class="col-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="<%= product ? 'pr-' + product.code : '' %>"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <label for="exampleInputEmail1" class="form-label"
+                    ><%= content.form.productTitle %></label
+                  >
+                </div>
+                <div class="col-9">
+                  <input
+                    id="productTitle"
+                    type="text"
+                    value="<%= product ? product.title : '' %>"
+                    class="form-control"
+                    name="productTitle"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
+    </div>
     <script>
-        const host = window.location.origin;
+      const host = window.location.origin;
 
-        $('#saveBtn').on('click', function() {
-            const productTitle = $('#productTitle').val();
-            const data = {
-                title: productTitle,
-            };
-            $.ajax({
-                type: "POST",
-                url: host + '/product/add-product',
-                data,
-                success: function(data) {
-                    window.location.href = host + '/product/add-product/' + data;
-                },
-                error: function(xhr, status, error) {
-                    console.log('error');
-                },
-            });
+      $("#saveBtn").on("click", function () {
+        const productTitle = $("#productTitle").val();
+        const data = {
+          title: productTitle,
+        };
+        $.ajax({
+          type: "POST",
+          url: host + "/product/add-product",
+          data,
+          success: function (data) {
+            window.location.href = host + "/product/add-product/" + data;
+          },
+          error: function (xhr, status, error) {
+            console.log("error");
+          },
         });
-        $('#saveAndCloseBtn').on('click', function() {
-            const productTitle = $('#productTitle').val();
-            const data = {
-                title: productTitle,
-            };
-            $.ajax({
-                type: "POST",
-                url: host + '/product/add-product',
-                data,
-                success: function(data) {
-                    window.location.href = host + '/product';
-                },
-                error: function(xhr, status, error) {
-                    console.log('error');
-                },
-            });
+      });
+      $("#saveAndCloseBtn").on("click", function () {
+        const productTitle = $("#productTitle").val();
+        const data = {
+          title: productTitle,
+        };
+        $.ajax({
+          type: "POST",
+          url: host + "/product/add-product",
+          data,
+          success: function (data) {
+            window.location.href = host + "/product";
+          },
+          error: function (xhr, status, error) {
+            console.log("error");
+          },
         });
+      });
     </script>
-</body>
+  </body>
 </html>
