@@ -32,7 +32,7 @@ module.exports = {
     };
     return res.render("products/add", data);
   },
-  addProductPostData: async (req, res) => {
+  async addProductPostData(req, res) {
     try {
       const data = req.body;
       const newProduct = await productService.create(data);
@@ -40,6 +40,7 @@ module.exports = {
       res.status(200).send(String(newProduct._id));
     } catch (error) {
       console.error(`Error in addProductPostData: ${error}`);
+      res.status(500).send('Internal Server Error');
     }
   },
   async productRender(req, res) {
