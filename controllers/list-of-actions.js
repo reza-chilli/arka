@@ -1,25 +1,35 @@
 const actionsService = require("../services/list-of-actions");
 const stationService = require("../services/station");
 const productService = require("../services/product");
-const helpers = require('../helpers');
-const userService = require('../services/user');
+const helpers = require("../helpers");
+const userService = require("../services/user");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   async actionsDataTableRender(req, res) {
     const user = await userService.findOne({ _id: req.session.details.id });
-    const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
-
+    const generalContent = await helpers.grabGeneralContentFromLanguage(
+      user.settings.language || "english"
+    );
+    const rawData = fs.readFileSync(
+      path.join(__dirname, "../views/list-of-actions/list-of-actions.json")
+    );
+    const actionDataTableContent = JSON.parse(rawData);
     const data = {
       error: req.flash("error"),
       success: req.flash("success"),
       generalContent,
+      content: actionDataTableContent[user.settings.language || "english"],
     };
     return res.render("list-of-actions/list-of-actions", data);
   },
 
   async addActionRender(req, res) {
     const user = await userService.findOne({ _id: req.session.details.id });
-    const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
+    const generalContent = await helpers.grabGeneralContentFromLanguage(
+      user.settings.language || "english"
+    );
     try {
       const data = {
         error: req.flash("error"),
@@ -87,7 +97,7 @@ module.exports = {
       }
       data.product = product._id;
       data.station = station._id;
-      data.isQualitativeAction = data.type === 'qualitative';
+      data.isQualitativeAction = data.type === "qualitative";
       if (data.isQualitativeAction) {
         data.minimum = "";
         data.maximum = "";

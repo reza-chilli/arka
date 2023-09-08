@@ -1,0 +1,36 @@
+{
+  "english": {
+    "actions": "List of Actions",
+    "statusFilter": {
+      "all": "All",
+      "active": "Active",
+      "deactive": "Deactive"
+    },
+    "datatable": {
+      "actionTitle": "Action Title",
+      "product": "Product",
+      "station": "Station",
+      "type": "Type",
+      "status": "Status",
+      "createdAt": "Created At",
+      "searchBox": "Search Action"
+    }
+  },
+  "persian": {
+    "actions": "فهرست اقدامات",
+    "statusFilter": {
+      "all": "همه",
+      "active": "فعال",
+      "deactive": "غیر فعال"
+    },
+    "datatable": {
+      "actionTitle": "عنوان اقدام",
+      "product": "محصول",
+      "station": "ایستگاه",
+      "type": "نوع اقدام",
+      "status": "وضعیت",
+      "createdAt": "تاریخ ساخت",
+      "searchBox": "جستوجوی اقدام"
+    }
+  }
+}
