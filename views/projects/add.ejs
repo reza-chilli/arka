@@ -18,11 +18,11 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <button class="btn" id="saveBtn">Save</button>
+                    <button class="btn" id="saveBtn"><%= content.save %></button>
                   </li>
                   <li class="nav-item">
                     <button class="btn" id="saveAndCloseBtn">
-                      Save & Close
+                      <%= content.saveAndClose %>
                     </button>
                   </li>
                 </ul>
@@ -34,11 +34,18 @@
             <div
               class="border-bottom mb-3 col-lg-8 col-md-10 col-sm-12 mx-auto"
             >
-              <h3 class="fw-light mb-5">Add Project</h3>
+              <h3 class="fw-light mb-5">
+                <% if (projectData) { %>
+                  <%= content.editTitle %>
+                <% } else { %>
+                  <%= content.addTitle %>
+                <% } %>
+
+              </h3>
               <form autocomplete="off">
                 <div class="row mb-3">
                   <div class="col-3">
-                    <label class="form-label">Project Code</label>
+                    <label class="form-label"><%= content.form.projectCode %></label>
                   </div>
                   <div class="col-9">
                     <input
@@ -53,7 +60,7 @@
                 <div class="row mb-3">
                   <div class="col-3">
                     <label for="fixedSerialNumber" class="form-label"
-                      >Fixed Serial Number</label
+                      ><%= content.form.fixedSerialNumber %></label
                     >
                   </div>
                   <div class="col-9">
@@ -68,7 +75,7 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col-3">
-                    <label class="form-label">Product Count</label>
+                    <label class="form-label"><%= content.form.productCount %></label>
                   </div>
                   <div class="col-9">
                     <input
@@ -83,7 +90,7 @@
                 <div class="row mb-3">
                   <div class="col-3">
                     <label for="projectTitle" class="form-label"
-                      >Project Title</label
+                      ><%= content.form.projectTitle %></label
                     >
                   </div>
                   <div class="col-9">
@@ -99,7 +106,7 @@
                 <div class="row mb-3">
                   <div class="col-3">
                     <label for="firstSerialNo" class="form-label"
-                      >First Serial Number</label
+                      ><%= content.form.firstSerialNumber %></label
                     >
                   </div>
                   <div class="col-9">
@@ -115,7 +122,7 @@
                 <div class="row mb-3">
                   <div class="col-3">
                     <label for="lastSerialNumber" class="form-label"
-                      >Last Serial Number</label
+                      ><%= content.form.lastSerialNumber %></label
                     >
                   </div>
                   <div class="col-9">
@@ -130,7 +137,7 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col-3">
-                    <label for="product" class="form-label">product</label>
+                    <label for="product" class="form-label"><%= content.form.product %></label>
                   </div>
                   <div class="col-9">
                     <input

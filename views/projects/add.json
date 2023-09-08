@@ -1,0 +1,32 @@
+{
+  "english": {
+    "addTitle": "Add Project",
+    "editTitle": "Edit Project",
+    "form": {
+      "projectCode": "Project Code",
+      "fixedSerialNumber": "Fixed Serial Number",
+      "productCount": "Product Count",
+      "firstSerialNumber": "First Serial Number",
+      "lastSerialNumber": "Last Serial Number",
+      "product": "product",
+      "projectTitle": "Project Title"
+    },
+    "save": "Save",
+    "saveAndClose": "Save & Close"
+  },
+  "persian": {
+    "addTitle": "پروژه جدید",
+    "editTitle": "ویرایش پروژه",
+    "form": {
+      "projectCode": "کد پروژه",
+      "fixedSerialNumber": "شماره سریال ثابت",
+      "productCount": "تعداد محصول",
+      "firstSerialNumber": "شماره سریال از",
+      "lastSerialNumber": "شماره سریال تا",
+      "product": "محصول",
+      "projectTitle": "عنوان پروژه"
+    },
+    "save": "ذخیره",
+    "saveAndClose": "ذخیره و خروج"
+  }
+}

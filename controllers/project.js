@@ -30,10 +30,13 @@ module.exports = {
       const generalContent = await helpers.grabGeneralContentFromLanguage(
         user.settings.language || "english"
       );
+      const rawData = fs.readFileSync(path.join(__dirname, '../views/projects/add.json'));
+      const addProjectContent = JSON.parse(rawData);
       const data = {
         error: req.flash("error"),
         success: req.flash("success"),
         generalContent,
+        content: addProjectContent[user.settings.language || "english"],
         projectData: null,
       };
       return res.render("projects/add", data);
@@ -144,6 +147,8 @@ module.exports = {
       const generalContent = await helpers.grabGeneralContentFromLanguage(
         user.settings.language || "english"
       );
+      const rawData = fs.readFileSync(path.join(__dirname, '../views/projects/add.json'));
+      const editProjectContent = JSON.parse(rawData);
       const { projectId } = req.params;
       let {
         title,
@@ -174,6 +179,7 @@ module.exports = {
         error: req.flash("error"),
         success: req.flash("success"),
         generalContent,
+        content: editProjectContent[user.settings.language || "english"],
         projectData,
       };
       res.render("projects/add", data);
