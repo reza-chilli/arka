@@ -1,6 +1,12 @@
 {
   "english": {
     "actions": "List of Actions",
+    "secondaryNavbar": {
+      "new": "New",
+      "delete": "Delete",
+      "activate": "Activate",
+      "deactivate": "Deactivate"
+    },
     "statusFilter": {
       "all": "All",
       "active": "Active",
@@ -18,6 +24,12 @@
   },
   "persian": {
     "actions": "فهرست اقدامات",
+    "secondaryNavbar": {
+      "new": "ایجاد",
+      "delete": "حذف",
+      "activate": "فعال سازی",
+      "deactivate": "غیر فعال سازی"
+    },
     "statusFilter": {
       "all": "همه",
       "active": "فعال",

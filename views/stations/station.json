@@ -1,6 +1,12 @@
 {
   "english": {
     "stations": "Stations",
+    "secondaryNavbar": {
+      "new": "New",
+      "delete": "Delete",
+      "activate": "Activate",
+      "deactivate": "Deactivate"
+    },
     "statusFilter": {
       "all": "All",
       "active": "Active",
@@ -17,6 +23,12 @@
   },
   "persian": {
     "stations": "ایستگاه ها",
+    "secondaryNavbar": {
+      "new": "ایجاد",
+      "delete": "حذف",
+      "activate": "فعال سازی",
+      "deactivate": "غیر فعال سازی"
+    },
     "statusFilter": {
       "all": "همه",
       "active": "فعال",
