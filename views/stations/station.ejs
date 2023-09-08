@@ -124,9 +124,9 @@
               data: "active",
               render: function (data, type, row) {
                 if (row.active) {
-                  return "Active";
+                  return "<%= content.statusFilter.active %>";
                 }
-                return "Deactive";
+                return "<%= content.statusFilter.deactive %>";
               },
             },
             {
