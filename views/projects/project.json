@@ -1,0 +1,36 @@
+{
+  "english": {
+    "projects": "Projects",
+    "statusFilter": {
+      "all": "All",
+      "active": "Active",
+      "deactive": "Deactive"
+    },
+    "datatable": {
+      "projectCode": "Project Code",
+      "projectTitle": "Project Title",
+      "product": "Product",
+      "productCount": "Product Count",
+      "status": "Status",
+      "createdAt": "Created At",
+      "searchBox": "Search Project"
+    }
+  },
+  "persian": {
+    "projects": "پروژه ها",
+    "statusFilter": {
+      "all": "همه",
+      "active": "فعال",
+      "deactive": "غیر فعال"
+    },
+    "datatable": {
+      "projectCode": "کد پروژه",
+      "projectTitle": "عنوان پروژه",
+      "product": "محصول",
+      "productCount": "تعداد محصول",
+      "status": "وضعیت",
+      "createdAt": "تاریخ ساخت",
+      "searchBox": "جستوجوی پروژه"
+    }
+  }
+}
