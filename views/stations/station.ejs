@@ -16,9 +16,14 @@
           <nav class="navbar sticky-top navbar-expand-lg" style="z-index: 1">
             <div class="container-fluid">
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/station/add-station">New</a>
+                    <a
+                      class="nav-link"
+                      aria-current="page"
+                      href="/station/add-station"
+                      >New</a
+                    >
                   </li>
                   <li class="nav-item">
                     <button class="nav-link btn" id="deleteStation">
@@ -47,22 +52,22 @@
             >
               <thead>
                 <div class="mb-3 container d-flex px-0 justify-content-between">
-                  <h2 class="fw-light">Stations</h2>
+                  <h2 class="fw-light"><%= content.stations %></h2>
                   <div class="col-2">
                     <select class="form-select" id="status">
-                      <option value="all">All</option>
-                      <option selected value="active">Active</option>
-                      <option value="deactive">Deactive</option>
+                      <option value="all"><%= content.statusFilter.all %></option>
+                      <option selected value="active"><%= content.statusFilter.active %></option>
+                      <option value="deactive"><%= content.statusFilter.deactive %></option>
                     </select>
                   </div>
                 </div>
                 <tr>
                   <th></th>
-                  <th>Station Title</th>
-                  <th>Product</th>
-                  <th>Station NO</th>
-                  <th>Status</th>
-                  <th>Created On</th>
+                  <th><%= content.datatable.stationTitle %></th>
+                  <th><%= content.datatable.product %></th>
+                  <th><%= content.datatable.stationNo %></th>
+                  <th><%= content.datatable.status %></th>
+                  <th><%= content.datatable.createdAt %></th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -77,13 +82,15 @@
 
         const dataTable = $("#myTable").DataTable({
           oLanguage: {
-            sSearch: "Search Station",
+            sSearch: "<%= content.datatable.searchBox %>",
           },
           processing: true,
           serverSide: true,
           ordering: false,
           autoWidth: false,
-          pageLength: "<%= settings.recordPerPage %>" ? "<%= settings.recordPerPage %>" : 10,
+          pageLength: "<%= settings.recordPerPage %>"
+            ? "<%= settings.recordPerPage %>"
+            : 10,
           select: {
             style: "multi",
           },
@@ -122,7 +129,7 @@
                 return "Deactive";
               },
             },
-            { 
+            {
               data: "createdAt",
               render: function (data, type, row) {
                 return moment(row.createdAt)
@@ -208,5 +215,15 @@
         }
       });
     </script>
+    <% if (settings.language === 'persian') { %>
+    <style>
+      .dataTables_filter {
+        text-align: left !important;
+      }
+      th {
+        text-align: right !important;
+      }
+    </style>
+    <% } %>
   </body>
 </html>

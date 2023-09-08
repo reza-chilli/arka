@@ -1,0 +1,34 @@
+{
+  "english": {
+    "stations": "Stations",
+    "statusFilter": {
+      "all": "All",
+      "active": "Active",
+      "deactive": "Deactive"
+    },
+    "datatable": {
+      "stationTitle": "ُStation Title",
+      "product": "product",
+      "stationNo": "Station NO",
+      "status": "Status",
+      "createdAt": "Created At",
+      "searchBox": "Search ُStation"
+    }
+  },
+  "persian": {
+    "stations": "ایستگاه ها",
+    "statusFilter": {
+      "all": "همه",
+      "active": "فعال",
+      "deactive": "غیر فعال"
+    },
+    "datatable": {
+      "stationTitle": "عنوان ایستگاه",
+      "product": "محصول",
+      "stationNo": "شماره ایستگاه",
+      "status": "وضعیت",
+      "createdAt": "تاریخ ساخت",
+      "searchBox": "جستوجوی ایستگاه"
+    }
+  }
+}
