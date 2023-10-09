@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="<%= settings.language === 'persian' ? 'fa' : 'en' %>" dir="<%= settings.language === 'persian' ? 'rtl' : 'ltr' %>">
+<html
+  lang="<%= settings.language === 'persian' ? 'fa' : 'en' %>"
+  dir="<%= settings.language === 'persian' ? 'rtl' : 'ltr' %>"
+>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,11 +21,13 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <button class="btn" id="saveBtn">Save</button>
+                    <button class="btn" id="saveBtn">
+                      <%= content.save %>
+                    </button>
                   </li>
                   <li class="nav-item">
                     <button class="btn" id="saveAndCloseBtn">
-                      Save & Close
+                      <%= content.saveAndClose %>
                     </button>
                   </li>
                 </ul>
@@ -30,71 +35,82 @@
             </div>
           </nav>
           <hr class="mt-0" />
-          <div class="container border px-5 py-3">
-            <form autocomplete="off">
-              <div class="row mb-3">
-                <div class="col-3">
-                  <label for="exampleInputEmail1" class="form-label"
-                    >Station Code</label
-                  >
+          <div class="container-fluid border-bottom px-5 py-3">
+            <div
+              class="mb-3 col-lg-8 col-md-10 col-sm-12 mx-auto"
+            >
+              <h3 class="fw-light mb-5"><%= content.addTitle %></h3>
+              <form autocomplete="off">
+                <div class="row mb-3">
+                  <div class="col-3">
+                    <label for="exampleInputEmail1" class="form-label"
+                      ><%= content.form.titles.stationCode %></label
+                    >
+                  </div>
+                  <div class="col-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="<%= content.form.placeHolders.stationCode %>"
+                      value="<%= code ? 'pr-' + code : '' %>"
+                      disabled
+                    />
+                  </div>
                 </div>
-                <div class="col-9">
-                  <input
-                    type="text"
-                    class="form-control"
-                    value="<%= code ? 'pr-' + code : '' %>"
-                    disabled
-                  />
+                <div class="row mb-3">
+                  <div class="col-3">
+                    <label for="stationTitle" class="form-label"
+                      ><%= content.form.titles.stationTitle %></label
+                    >
+                  </div>
+                  <div class="col-9">
+                    <input
+                      id="stationTitle"
+                      type="text"
+                      placeholder="<%= content.form.placeHolders.stationTitle %>"
+                      value="<%= title ? title : '' %>"
+                      class="form-control"
+                      name="stationTitle"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-3">
-                  <label for="stationTitle" class="form-label"
-                    >Station Title</label
-                  >
+                <div class="row mb-3">
+                  <div class="col-3">
+                    <label for="productTitle" class="form-label"
+                      ><%= content.form.titles.product %></label
+                    >
+                  </div>
+                  <div class="col-9">
+                    <input
+                      id="productTitle"
+                      type="text"
+                      placeholder="<%= content.form.placeHolders.product %>"
+                      value="<%= title ? title : '' %>"
+                      class="form-control"
+                      name="productTitle"
+                    />
+                    <div id="search-result" class="result-box"></div>
+                  </div>
                 </div>
-                <div class="col-9">
-                  <input
-                    id="stationTitle"
-                    type="text"
-                    value="<%= title ? title : '' %>"
-                    class="form-control"
-                    name="stationTitle"
-                  />
+                <div class="row">
+                  <div class="col-3">
+                    <label for="stationNO" class="form-label"
+                      ><%= content.form.titles.stationNO %></label
+                    >
+                  </div>
+                  <div class="col-9">
+                    <input
+                      id="stationNO"
+                      type="text"
+                      placeholder="<%= content.form.placeHolders.stationNO %>"
+                      value="<%= title ? title : '' %>"
+                      class="form-control"
+                      name="stationNO"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-3">
-                  <label for="productTitle" class="form-label">Product</label>
-                </div>
-                <div class="col-9">
-                  <input
-                    id="productTitle"
-                    type="text"
-                    value="<%= title ? title : '' %>"
-                    class="form-control"
-                    name="productTitle"
-                  />
-                  <div id="search-result" class="result-box"></div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-3">
-                  <label for="stationNO" class="form-label"
-                    >Station Number</label
-                  >
-                </div>
-                <div class="col-9">
-                  <input
-                    id="stationNO"
-                    type="text"
-                    value="<%= title ? title : '' %>"
-                    class="form-control"
-                    name="stationNO"
-                  />
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>

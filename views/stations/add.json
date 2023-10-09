@@ -1,0 +1,40 @@
+{
+  "english": {
+    "addTitle": "Add Action",
+    "editTitle": "Edit Action",
+    "form": {
+      "titles": {
+        "statoinCode": "Station Code",
+        "stationTitle": "Station Title",
+        "product": "Product",
+        "stationNO": "Station Number"
+      },
+      "placeHolders": {
+        "stationTitle": "Enter Station Title",
+        "product": "Enter Product Title",
+        "stationNO": "Enter Station Number"
+      }
+    },
+    "save": "Save",
+    "saveAndClose": "Save & Close"
+  },
+  "persian": {
+    "addTitle": "ایستگاه جدید",
+    "editTitle": "ویرایش ایستگاه",
+    "form": {
+      "titles": {
+        "stationCode": "کد ایستگاه",
+        "stationTitle": "عنوان ایستگاه",
+        "product": "عنوان محصول",
+        "stationNO": "شماره ایستگاه"
+      },
+      "placeHolders": {
+        "stationTitle": "عنوان ایستگاه را وارد کنید",
+        "product": "عنوان محصول را وارد کنید",
+        "stationNO": "شماره ایستگاه را وارد کنید"
+      }
+    },
+    "save": "ذخیره",
+    "saveAndClose": "ذخیره و خروج"
+  }
+}

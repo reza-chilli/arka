@@ -30,11 +30,14 @@ module.exports = {
     const generalContent = await helpers.grabGeneralContentFromLanguage(
       user.settings.language || "english"
     );
+    const rawData = fs.readFileSync(path.join(__dirname, '../views/list-of-actions/add.json'));
+    const addActionContent = JSON.parse(rawData);
     try {
       const data = {
         error: req.flash("error"),
         success: req.flash("success"),
         generalContent,
+        content: addActionContent[user.settings.language || "english"],
         actionData: null,
       };
       return res.render("list-of-actions/add", data);

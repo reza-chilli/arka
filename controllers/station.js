@@ -22,10 +22,13 @@ module.exports = {
   async addStationRender (req, res) {
     const user = await userService.findOne({ _id: req.session.details.id });
     const generalContent = await helpers.grabGeneralContentFromLanguage(user.settings.language || 'english');
+    const rawData = fs.readFileSync(path.join(__dirname, '../views/stations/add.json'));
+    const addActionContent = JSON.parse(rawData);
     const data = {
       error: req.flash("error"),
       success: req.flash("success"),
       generalContent,
+      content: addActionContent[user.settings.language || 'english'],
       code: null,
       title: null,
     };
