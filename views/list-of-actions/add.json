@@ -1,0 +1,22 @@
+{
+    "english": {
+        "addTitle": "Add Action",
+        "editTitle": "Edit Action",
+        "form": {
+            "productCode": "Product Code",
+            "productTitle": "Product Title"
+        },
+        "save": "Save",
+        "saveAndClose": "Save & Close"
+    },
+    "persian": {
+        "addTitle": "اقدام جدید",
+        "editTitle": "ویرایش اقدام",
+        "form": {
+            "productCode": "کد محصول",
+            "productTitle": "عنوان محصول"
+        },
+        "save": "ذخیره",
+        "saveAndClose": "ذخیره و خروج"
+    }
+}
