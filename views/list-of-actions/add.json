@@ -1,0 +1,56 @@
+{
+  "english": {
+    "addTitle": "Add Action",
+    "editTitle": "Edit Action",
+    "form": {
+      "titles": {
+        "product": "Product",
+        "station": "Station",
+        "actionTitle": "Action Title",
+        "type": "Type",
+        "quantitative": "Quantitative",
+        "qualitative": "Qualitative",
+        "minimum": "Minimum",
+        "maximum": "Maximum",
+        "unitOfMeasurement": "Unit Of Measurement"
+      },
+      "placeHolders": {
+        "product": "Enter Product Title",
+        "station": "Enter Station Title",
+        "actionTitle": "Enter Action Title",
+        "minimum": "Enter Minimum",
+        "maximum": "Enter Maximum",
+        "unitOfMeasurement": "Enter Unit Of Measurement"
+      }
+    },
+    "save": "Save",
+    "saveAndClose": "Save & Close"
+  },
+  "persian": {
+    "addTitle": "اقدام جدید",
+    "editTitle": "ویرایش اقدام",
+    "form": {
+      "titles": {
+        "product": "محصول",
+        "station": "ایستگاه",
+        "actionTitle": "عنوان اقدام",
+        "type": "نوع اقدام",
+        "quantitative": "کمی",
+        "qualitative": "کیفی",
+        "minimum": "حداقل",
+        "maximum": "حداکثر",
+        "unitOfMeasurement": "واحد اندازه گیری"
+      },
+      "placeHolders": {
+        "product": "عنوان محصول را وارد کنید",
+        "station": "عنوان ایستگاه را وارد کنید",
+        "actionTitle": "عنوان اقدام را وارد کنید",
+        "minimum": "حداقل را وارد کنید",
+        "maximum": "حداکثر را وارد کنید",
+        "unitOfMeasurement": "واحد اندازه گیری را وارد کنید"
+      }
+    },
+    "save": "ذخیره",
+    "saveAndClose": "ذخیره و خروج"
+  }
+}
